@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/06/2018 11:59:54 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 12/06/2018 11:57:15 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pos.stalupita.model.Producto" table="producto" catalog="stalupita" optimistic-lock="version">
         <id name="idproducto" type="java.lang.Integer">
             <column name="idproducto" />
             <generator class="identity" />
         </id>
+        <many-to-one name="categoria" class="pos.stalupita.model.Categoria" fetch="select">
+            <column name="idcategoria" not-null="true" />
+        </many-to-one>
         <many-to-one name="unidadMedida" class="pos.stalupita.model.UnidadMedida" fetch="select">
             <column name="idume" length="11" not-null="true" />
         </many-to-one>

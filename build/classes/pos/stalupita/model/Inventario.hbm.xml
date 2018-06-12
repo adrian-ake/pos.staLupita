@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/06/2018 11:59:54 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 12/06/2018 11:57:15 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pos.stalupita.model.Inventario" table="inventario" catalog="stalupita" optimistic-lock="version">
         <id name="idinventario" type="java.lang.Integer">

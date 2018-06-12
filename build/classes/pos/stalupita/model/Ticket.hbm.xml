@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/06/2018 11:59:54 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 12/06/2018 11:57:15 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pos.stalupita.model.Ticket" table="ticket" catalog="stalupita" optimistic-lock="version">
         <id name="idticket" type="java.lang.Integer">
@@ -22,6 +22,9 @@
         </property>
         <property name="fechaCancelado" type="timestamp">
             <column name="fecha_cancelado" length="19" />
+        </property>
+        <property name="pagado" type="java.lang.Boolean">
+            <column name="pagado" />
         </property>
         <property name="estado" type="java.lang.Boolean">
             <column name="estado" />

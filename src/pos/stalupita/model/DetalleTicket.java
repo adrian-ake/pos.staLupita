@@ -1,5 +1,5 @@
 package pos.stalupita.model;
-// Generated 11/06/2018 11:59:53 AM by Hibernate Tools 4.3.1
+// Generated 12/06/2018 11:57:14 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;

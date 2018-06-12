@@ -13,7 +13,9 @@
     <mapping resource="pos/stalupita/model/Inventario.hbm.xml"/>
     <mapping resource="pos/stalupita/model/Ticket.hbm.xml"/>
     <mapping resource="pos/stalupita/model/DetalleTicket.hbm.xml"/>
-    <mapping resource="pos/stalupita/model/UnidadMedida.hbm.xml"/>
     <mapping resource="pos/stalupita/model/Producto.hbm.xml"/>
+    <mapping resource="pos/stalupita/model/Categoria.hbm.xml"/>
+    <mapping resource="pos/stalupita/model/UnidadMedida.hbm.xml"/>
+    <mapping resource="pos/stalupita/model/Configuracion.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

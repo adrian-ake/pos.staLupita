@@ -5,15 +5,17 @@
  */
 package pos.stalupita.view;
 
+import java.awt.Frame;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pos.stalupita.herramientas.Utilities;
 
 /**
  *
  * @author adrian.ake
  */
-@Component
+@Component(value = "prototype")
 public class JdlgPrincipal extends javax.swing.JDialog {
 
     @Resource
@@ -23,14 +25,16 @@ public class JdlgPrincipal extends javax.swing.JDialog {
      * Creates new form jdlgPrincipal
      */
     public JdlgPrincipal(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
+        Utilities.setDialogIcon(this);
     }
 
     @Autowired
     public JdlgPrincipal() {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
+        Utilities.setDialogIcon(this);
     }
 
     /**
@@ -57,16 +61,18 @@ public class JdlgPrincipal extends javax.swing.JDialog {
         jTextField2 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmitemRegistrar = new javax.swing.JMenuItem();
+        jmitemInventario = new javax.swing.JMenuItem();
+        jmitemAdministrar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jmitemCompras = new javax.swing.JMenuItem();
+        jmitemventas = new javax.swing.JMenuItem();
+        jmitemStock = new javax.swing.JMenuItem();
+        jmitemGrafCompras = new javax.swing.JMenuItem();
+        jmitemGrafVentas = new javax.swing.JMenuItem();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sistema- V1.0.0");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -76,6 +82,8 @@ public class JdlgPrincipal extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(41, 107, 189));
         jLabel1.setText("Punto de Venta");
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,22 +228,22 @@ public class JdlgPrincipal extends javax.swing.JDialog {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/OFFice-70-4-48.png"))); // NOI18N
         jMenu1.setText("Producto");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Add_create_new_more_plus_1886085.png"))); // NOI18N
-        jMenuItem1.setText("Registrar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmitemRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Add_create_new_more_plus_1886085.png"))); // NOI18N
+        jmitemRegistrar.setText("Registrar");
+        jmitemRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmitemRegistrarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jmitemRegistrar);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/about_faq_help_hint_info_information-4-24.png"))); // NOI18N
-        jMenuItem3.setText("Inventario");
-        jMenu1.add(jMenuItem3);
+        jmitemInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/about_faq_help_hint_info_information-4-24.png"))); // NOI18N
+        jmitemInventario.setText("Inventario");
+        jMenu1.add(jmitemInventario);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Checklist_379508.png"))); // NOI18N
-        jMenuItem2.setText("Administrar");
-        jMenu1.add(jMenuItem2);
+        jmitemAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Checklist_379508.png"))); // NOI18N
+        jmitemAdministrar.setText("Administrar");
+        jMenu1.add(jmitemAdministrar);
 
         jMenuBar1.add(jMenu1);
 
@@ -243,25 +251,30 @@ public class JdlgPrincipal extends javax.swing.JDialog {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/OFFice-51-48.png"))); // NOI18N
         jMenu2.setText("Reportes");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/cash_dollar_funding_investment_money__currency-3-24.png"))); // NOI18N
-        jMenuItem4.setText("Compras");
-        jMenu2.add(jMenuItem4);
+        jmitemCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/cash_dollar_funding_investment_money__currency-3-24.png"))); // NOI18N
+        jmitemCompras.setText("Compras");
+        jMenu2.add(jmitemCompras);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/basket_cart_red_shopping-24.png"))); // NOI18N
-        jMenuItem5.setText("Ventas");
-        jMenu2.add(jMenuItem5);
+        jmitemventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/basket_cart_red_shopping-24.png"))); // NOI18N
+        jmitemventas.setText("Ventas");
+        jmitemventas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitemventasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmitemventas);
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Search_document-24.png"))); // NOI18N
-        jMenuItem6.setText("Stocks | Inventario");
-        jMenu2.add(jMenuItem6);
+        jmitemStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Search_document-24.png"))); // NOI18N
+        jmitemStock.setText("Stocks | Inventario");
+        jMenu2.add(jmitemStock);
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Chart-24.png"))); // NOI18N
-        jMenuItem8.setText("Grafica Compras");
-        jMenu2.add(jMenuItem8);
+        jmitemGrafCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Chart-24.png"))); // NOI18N
+        jmitemGrafCompras.setText("Grafica Compras");
+        jMenu2.add(jmitemGrafCompras);
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Diagram-24.png"))); // NOI18N
-        jMenuItem7.setText("Grafica Ventas");
-        jMenu2.add(jMenuItem7);
+        jmitemGrafVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Diagram-24.png"))); // NOI18N
+        jmitemGrafVentas.setText("Grafica Ventas");
+        jMenu2.add(jmitemGrafVentas);
 
         jMenuBar1.add(jMenu2);
 
@@ -311,9 +324,20 @@ public class JdlgPrincipal extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmitemRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemRegistrarActionPerformed
+        this.jdlgRegistrar_prod.setModal(true);
+        this.jdlgRegistrar_prod.setLocationRelativeTo(this);
+        this.jdlgRegistrar_prod.setVisible(true);
+    }//GEN-LAST:event_jmitemRegistrarActionPerformed
+
+    private void jmitemventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemventasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmitemventasActionPerformed
+
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -328,19 +352,19 @@ public class JdlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JMenuItem jmitemAdministrar;
+    private javax.swing.JMenuItem jmitemCompras;
+    private javax.swing.JMenuItem jmitemGrafCompras;
+    private javax.swing.JMenuItem jmitemGrafVentas;
+    private javax.swing.JMenuItem jmitemInventario;
+    private javax.swing.JMenuItem jmitemRegistrar;
+    private javax.swing.JMenuItem jmitemStock;
+    private javax.swing.JMenuItem jmitemventas;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,5 @@
 package pos.stalupita.model;
-// Generated 11/06/2018 11:59:53 AM by Hibernate Tools 4.3.1
+// Generated 12/06/2018 11:57:14 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -19,18 +19,20 @@ public class Ticket  implements java.io.Serializable {
      private BigDecimal cambio;
      private Date fechaRegistrado;
      private Date fechaCancelado;
+     private Boolean pagado;
      private Boolean estado;
      private Set detalleTickets = new HashSet(0);
 
     public Ticket() {
     }
 
-    public Ticket(BigDecimal total, BigDecimal pago, BigDecimal cambio, Date fechaRegistrado, Date fechaCancelado, Boolean estado, Set detalleTickets) {
+    public Ticket(BigDecimal total, BigDecimal pago, BigDecimal cambio, Date fechaRegistrado, Date fechaCancelado, Boolean pagado, Boolean estado, Set detalleTickets) {
        this.total = total;
        this.pago = pago;
        this.cambio = cambio;
        this.fechaRegistrado = fechaRegistrado;
        this.fechaCancelado = fechaCancelado;
+       this.pagado = pagado;
        this.estado = estado;
        this.detalleTickets = detalleTickets;
     }
@@ -76,6 +78,13 @@ public class Ticket  implements java.io.Serializable {
     
     public void setFechaCancelado(Date fechaCancelado) {
         this.fechaCancelado = fechaCancelado;
+    }
+    public Boolean getPagado() {
+        return this.pagado;
+    }
+    
+    public void setPagado(Boolean pagado) {
+        this.pagado = pagado;
     }
     public Boolean getEstado() {
         return this.estado;

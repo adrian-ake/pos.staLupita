@@ -5,7 +5,12 @@
  */
 package pos.stalupita.controller;
 
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import pos.stalupita.model.Categoria;
+import pos.stalupita.model.UnidadMedida;
+import pos.stalupita.service.ProductoService;
 
 /**
  *
@@ -13,5 +18,15 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class ProductoController {
-    
+
+    @Resource
+    private ProductoService productoService;
+
+    public List<Categoria> getAllCategorias() {
+        return this.productoService.getAllCategorias();
+    }
+
+    public List<UnidadMedida> getAllUmes() {
+        return this.productoService.getAllUmes();
+    }
 }

@@ -1,5 +1,5 @@
 package pos.stalupita.model;
-// Generated 11/06/2018 11:59:53 AM by Hibernate Tools 4.3.1
+// Generated 12/06/2018 11:57:14 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,6 +14,7 @@ public class Producto  implements java.io.Serializable {
 
 
      private Integer idproducto;
+     private Categoria categoria;
      private UnidadMedida unidadMedida;
      private String descripcion;
      private BigDecimal costo;
@@ -29,10 +30,12 @@ public class Producto  implements java.io.Serializable {
     }
 
 	
-    public Producto(UnidadMedida unidadMedida) {
+    public Producto(Categoria categoria, UnidadMedida unidadMedida) {
+        this.categoria = categoria;
         this.unidadMedida = unidadMedida;
     }
-    public Producto(UnidadMedida unidadMedida, String descripcion, BigDecimal costo, BigDecimal precio, Boolean estado, Date createdAt, Date updatedAt, Date deletedAt, Set inventarios, Set detalleTickets) {
+    public Producto(Categoria categoria, UnidadMedida unidadMedida, String descripcion, BigDecimal costo, BigDecimal precio, Boolean estado, Date createdAt, Date updatedAt, Date deletedAt, Set inventarios, Set detalleTickets) {
+       this.categoria = categoria;
        this.unidadMedida = unidadMedida;
        this.descripcion = descripcion;
        this.costo = costo;
@@ -51,6 +54,13 @@ public class Producto  implements java.io.Serializable {
     
     public void setIdproducto(Integer idproducto) {
         this.idproducto = idproducto;
+    }
+    public Categoria getCategoria() {
+        return this.categoria;
+    }
+    
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
     public UnidadMedida getUnidadMedida() {
         return this.unidadMedida;

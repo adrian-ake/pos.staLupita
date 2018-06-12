@@ -10,14 +10,17 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
+import pos.stalupita.herramientas.AdapterNumericoFormatMak;
+import pos.stalupita.herramientas.Utilities;
 import pos.stalupita.model.Categoria;
+import pos.stalupita.model.Producto;
 import pos.stalupita.model.UnidadMedida;
 
 /**
  *
  * @author adrian.ake
  */
-@Component
+@Component(value = "prototype")
 public class JdlgRegistrar_prod extends javax.swing.JDialog {
 
     @Resource
@@ -29,13 +32,19 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
     public JdlgRegistrar_prod(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Utilities.setDialogIcon(this);
+        this.jtxtCosto.addKeyListener(new AdapterNumericoFormatMak(this.jtxtCosto, 8, 2));
+        this.jtxtVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtVenta, 8, 2));
     }
 
     @Autowired
     public JdlgRegistrar_prod(ProductoController productoController) {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
+        Utilities.setDialogIcon(this);
         this.productoController = productoController;
+        this.jtxtCosto.addKeyListener(new AdapterNumericoFormatMak(this.jtxtCosto, 8, 2));
+        this.jtxtVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtVenta, 8, 2));
     }
 
     /**
@@ -98,6 +107,11 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         btnGuardar.setText("Guardar");
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jtxtDescripcion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtDescripcion.setForeground(new java.awt.Color(0, 153, 255));
@@ -105,11 +119,14 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
 
         jtxtVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtVenta.setForeground(new java.awt.Color(0, 153, 255));
-        jtxtVenta.setText("Precio de Venta");
 
         jtxtCosto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtCosto.setForeground(new java.awt.Color(0, 153, 255));
-        jtxtCosto.setText("Costo de Compra");
+        jtxtCosto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtCostoFocusGained(evt);
+            }
+        });
 
         jcboxUme.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jcboxUme.setForeground(new java.awt.Color(0, 153, 255));
@@ -147,11 +164,11 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcboxUme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtxtCosto)
-                                .addComponent(jtxtVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jcboxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jtxtCosto, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtxtVenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -202,6 +219,22 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jtxtCostoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtCostoFocusGained
+
+    }//GEN-LAST:event_jtxtCostoFocusGained
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private Producto getProductoGenerado() {
+        Producto producto = new Producto();
+        producto.setIdproducto(0);
+        producto.setUnidadMedida((UnidadMedida) this.jcboxUme.getSelectedItem());
+        producto.setCategoria((Categoria) this.jcboxCategoria.getSelectedItem());
+        return producto;
+    }
 
     @Override
     public void setVisible(boolean b) {

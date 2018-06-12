@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2018 11:59:54 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pos.stalupita.model.Ticket" table="ticket" catalog="stalupita" optimistic-lock="version">
+        <id name="idticket" type="java.lang.Integer">
+            <column name="idticket" />
+            <generator class="identity" />
+        </id>
+        <property name="total" type="big_decimal">
+            <column name="total" precision="10" />
+        </property>
+        <property name="pago" type="big_decimal">
+            <column name="pago" precision="10" />
+        </property>
+        <property name="cambio" type="big_decimal">
+            <column name="cambio" precision="10" />
+        </property>
+        <property name="fechaRegistrado" type="timestamp">
+            <column name="fecha_registrado" length="19" />
+        </property>
+        <property name="fechaCancelado" type="timestamp">
+            <column name="fecha_cancelado" length="19" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="detalleTickets" table="detalle_ticket" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idticket" not-null="true" />
+            </key>
+            <one-to-many class="pos.stalupita.model.DetalleTicket" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/06/2018 11:59:54 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pos.stalupita.model.UnidadMedida" table="unidad_medida" catalog="stalupita" optimistic-lock="version">
+        <id name="idume" type="string">
+            <column name="idume" length="11" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <property name="cantidad" type="big_decimal">
+            <column name="cantidad" precision="10" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="productos" table="producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idume" length="11" not-null="true" />
+            </key>
+            <one-to-many class="pos.stalupita.model.Producto" />
+        </set>
+    </class>
+</hibernate-mapping>

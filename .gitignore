@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar para que se suban las libs
 *.war
 *.nar
 *.ear

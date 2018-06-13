@@ -5,8 +5,10 @@
  */
 package pos.stalupita.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
@@ -56,7 +58,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnNuevoTicket6 = new javax.swing.JButton();
         btnNuevoTicket8 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbCatlProductos = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -79,6 +81,11 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnNuevoTicket3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnNuevoTicket3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevoTicket3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevoTicket3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoTicket3ActionPerformed(evt);
+            }
+        });
 
         btnNuevoTicket6.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnNuevoTicket6.setForeground(new java.awt.Color(51, 102, 255));
@@ -127,10 +134,11 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(tableModelCatProductos1);
-        jScrollPane1.setViewportView(jTable1);
+        jtbCatlProductos.setModel(tableModelCatProductos1);
+        jScrollPane1.setViewportView(jtbCatlProductos);
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
+        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +149,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jpnlFondoVerdeLayout.setHorizontalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
-                .addGap(326, 326, 326)
+                .addGap(242, 242, 242)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -175,7 +183,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
@@ -194,10 +202,23 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private void btnNuevoTicket6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket6ActionPerformed
         this.jdlgRegistrar_prod.setModal(true);
         this.jdlgRegistrar_prod.setLocationRelativeTo(this);
+        this.jdlgRegistrar_prod.setTitulo("Registrar Producto");
+        this.jdlgRegistrar_prod.resetDatos();
         this.jdlgRegistrar_prod.setVisible(true);
+        this.cargarDatos();
     }//GEN-LAST:event_btnNuevoTicket6ActionPerformed
 
+    private void btnNuevoTicket3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket3ActionPerformed
+        if (this.validacionXSeleccion()) {
+            this.editarProducto();
+            this.cargarDatos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Elige el producto que deseas editar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnNuevoTicket3ActionPerformed
+
     private void cargarDatos() {
+        this.tableModelCatProductos1.change(new ArrayList<Producto>());
         List<Producto> productos = this.productoController.getAllProductos();
         this.tableModelCatProductos1.change(productos);
     }
@@ -216,9 +237,31 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
+    private javax.swing.JTable jtbCatlProductos;
     private pos.stalupita.tablemodels.TableModelCatProductos tableModelCatProductos1;
     // End of variables declaration//GEN-END:variables
+
+    private void editarProducto() {
+        Integer index_selected = this.jtbCatlProductos.getSelectedRow();
+        Producto producto_edit = this.getProductoXIndex(index_selected);
+
+        this.jdlgRegistrar_prod.setModal(true);
+        this.jdlgRegistrar_prod.setLocationRelativeTo(this);
+        this.jdlgRegistrar_prod.setTitulo("Editar Producto");
+        this.jdlgRegistrar_prod.resetDatos();
+        this.jdlgRegistrar_prod.setEditProducto(producto_edit);
+        this.jdlgRegistrar_prod.setVisible(true);
+    }
+
+    private boolean validacionXSeleccion() {
+        Integer index_selected = this.jtbCatlProductos.getSelectedRow();
+        return index_selected != -1;
+    }
+
+    public Producto getProductoXIndex(Integer index) {
+        return this.tableModelCatProductos1.get(index);
+    }
+
 }

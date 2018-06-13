@@ -58,7 +58,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jblTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -71,6 +71,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         jcboxUme = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jcboxCategoria = new javax.swing.JComboBox();
+        jlblIdProducto = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -78,9 +79,9 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel1.setText("Registrar Producto");
+        jblTitulo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jblTitulo.setForeground(new java.awt.Color(0, 51, 153));
+        jblTitulo.setText("Registrar Producto");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Descripcion:");
@@ -124,9 +125,16 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
 
         jtxtPrecioVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtPrecioVenta.setForeground(new java.awt.Color(0, 0, 204));
+        jtxtPrecioVenta.setText("0.00");
+        jtxtPrecioVenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtPrecioVentaFocusGained(evt);
+            }
+        });
 
         jtxtCosto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtCosto.setForeground(new java.awt.Color(0, 0, 204));
+        jtxtCosto.setText("0.00");
         jtxtCosto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtCostoFocusGained(evt);
@@ -150,17 +158,20 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(158, 158, 158))
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(60, 60, 60)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
+                        .addComponent(jlblIdProducto)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -174,17 +185,20 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                             .addComponent(jcboxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtxtCosto)
-                            .addComponent(jtxtPrecioVenta))))
-                .addGap(20, 20, 20))
+                            .addComponent(jtxtPrecioVenta))
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
+                .addComponent(jblTitulo)
+                .addGap(17, 17, 17)
+                .addComponent(jlblIdProducto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(43, 43, 43)
+                        .addGap(7, 7, 7)
                         .addComponent(jLabel2))
                     .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
@@ -203,11 +217,11 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtxtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -227,7 +241,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jtxtCostoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtCostoFocusGained
-
+        this.jtxtCosto.selectAll();
     }//GEN-LAST:event_jtxtCostoFocusGained
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -240,13 +254,21 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void jtxtPrecioVentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPrecioVentaFocusGained
+        this.jtxtPrecioVenta.selectAll();
+    }//GEN-LAST:event_jtxtPrecioVentaFocusGained
+
     private void guardarProducto() {
-        this.productoController.guardarProducto(this.getProductoGenerado());
+        this.productoController.guardarUpdProducto(this.getProductoGenerado());
+    }
+
+    public void setTitulo(String titulo) {
+        this.jblTitulo.setText(titulo);
     }
 
     private Producto getProductoGenerado() {
         Producto producto = new Producto();
-        producto.setIdproducto(0);
+        producto.setIdproducto(Integer.valueOf(this.jlblIdProducto.getText()));
         producto.setUnidadMedida((UnidadMedida) this.jcboxUme.getSelectedItem());
         producto.setCategoria((Categoria) this.jcboxCategoria.getSelectedItem());
         producto.setDescripcion(this.jtxtDescripcion.getText());
@@ -267,10 +289,25 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     public void setVisible(boolean b) {
         this.jtxtDescripcion.selectAll();
         this.jtxtDescripcion.setFocusable(true);
-
-        this.cargarCombos();
-
+        this.jlblIdProducto.setVisible(false);
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void resetDatos() {
+        this.jtxtDescripcion.setText("Descripcion Producto");
+        this.jtxtCosto.setText("0.00");
+        this.jtxtPrecioVenta.setText("0.00");
+        this.jlblIdProducto.setText("0");
+        cargarCombos();
+    }
+
+    public void setEditProducto(Producto producto) {
+        this.jlblIdProducto.setText(producto.getIdproducto().toString());
+        this.jtxtDescripcion.setText(producto.getDescripcion());
+        this.jtxtCosto.setText(producto.getCosto().toString());
+        this.jtxtPrecioVenta.setText(producto.getPrecio().toString());
+        this.jcboxCategoria.setSelectedItem(producto.getCategoria());
+        this.jcboxUme.setSelectedItem(producto.getUnidadMedida());
     }
 
     private void cargarCombos() {
@@ -291,14 +328,15 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jblTitulo;
     private javax.swing.JComboBox jcboxCategoria;
     private javax.swing.JComboBox jcboxUme;
+    private javax.swing.JLabel jlblIdProducto;
     private javax.swing.JTextField jtxtCosto;
     private javax.swing.JTextField jtxtDescripcion;
     private javax.swing.JTextField jtxtPrecioVenta;

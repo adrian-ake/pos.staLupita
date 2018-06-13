@@ -38,6 +38,10 @@ public class ProductoService {
         this.genericDAOI.save(productoGenerado);
     }
 
+    public void guardarUpdProducto(Producto productoGenerado) {
+        this.genericDAOI.saveOrUpdate(productoGenerado);
+    }
+
     public List<Producto> getAllProductos() {
         return this.productoDAOI.getAllProductos();
     }

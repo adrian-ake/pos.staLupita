@@ -382,6 +382,8 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private void jmitemRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemRegistrarActionPerformed
         this.jdlgRegistrar_prod.setModal(true);
         this.jdlgRegistrar_prod.setLocationRelativeTo(this);
+        this.jdlgRegistrar_prod.setTitulo("Registrar Producto");
+        this.jdlgRegistrar_prod.resetDatos();
         this.jdlgRegistrar_prod.setVisible(true);
     }//GEN-LAST:event_jmitemRegistrarActionPerformed
 

@@ -55,6 +55,9 @@ public class GenericRepository implements GenericDAOI {
 
     @Override
     public void saveOrUpdate(Object obj) {
+        this.getSession().flush();
+        this.getSession().clear();
+
         this.getSession().saveOrUpdate(obj);
         this.getSession().getTransaction().commit();
     }

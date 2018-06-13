@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import pos.stalupita.model.Categoria;
+import pos.stalupita.model.Producto;
 import pos.stalupita.model.UnidadMedida;
 import pos.stalupita.service.ProductoService;
 
@@ -28,5 +29,9 @@ public class ProductoController {
 
     public List<UnidadMedida> getAllUmes() {
         return this.productoService.getAllUmes();
+    }
+
+    public void guardarProducto(Producto productoGenerado) {
+        this.productoService.guardarProducto(productoGenerado);
     }
 }

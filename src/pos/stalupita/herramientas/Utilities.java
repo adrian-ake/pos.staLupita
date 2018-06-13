@@ -14,13 +14,14 @@ import javax.swing.ImageIcon;
 public class Utilities {
 
     private static final String ICONO_VENTANAS = "/pos/stalupita/view/resources/pos_icon.png";
-    private static final String TITULO_VENTANAS = "Alimentos y Herbicidas Sta Lupita";
+    public static final String TITULO_VENTANAS = "Alimentos y Herbicidas Sta Lupita";
+    public static final String VERSION_SISTEMA = "V1.0.0";
 
     public static void setFrameIcon(javax.swing.JFrame frame) {
         if (frame == null) {
             return;
         }
-        frame.setTitle(TITULO_VENTANAS);
+        frame.setTitle(getTituloVtanas());
         frame.setIconImage(new ImageIcon(frame.getClass().getResource(ICONO_VENTANAS)).getImage());
     }
 
@@ -28,12 +29,16 @@ public class Utilities {
         if (dialog == null) {
             return;
         }
-        dialog.setTitle(TITULO_VENTANAS);
+        dialog.setTitle(getTituloVtanas());
         dialog.setIconImage(new ImageIcon(dialog.getClass().getResource(ICONO_VENTANAS)).getImage());
         dialog.setResizable(false);
     }
 
     public static ImageIcon getImageIcon() {
         return new ImageIcon(Utilities.class.getResource(ICONO_VENTANAS));
+    }
+
+    public static String getTituloVtanas() {
+        return Utilities.TITULO_VENTANAS + " " + Utilities.VERSION_SISTEMA;
     }
 }

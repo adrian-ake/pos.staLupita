@@ -2,14 +2,41 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!--Configuraciones para hibernate -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/stalupita</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">4dm1n.p05</property>
-    <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
-    <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">4dm1n.p05</property>
+        <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!--<property name="hibernate.connection.release_mode">after_transaction</property>-->
+        <property name="hibernate.connection.autocommit">true</property>
+        <property name="hibernate.show_sql">false</property>
+        <!-- Estas configuracione es para habilitar el uso de cache en de segundo nivel en hibernate -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property>
+        <property name="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</property>
+        <property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</property>
+        <property name="hibernate.cache.use_structured_entries">true</property>
+        <!-- Estas configuraciones son las que usa hibernate (c3p0) para conexión a bd-->
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">20</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">10</property>
+        <property name="hibernate.c3p0.acquire_increment">1</property>
+<!--        <property name="hibernate.c3p0.unreturnedConnectionTimeout">30</property>
+        <property name="hibernate.c3p0.validate">true</property>
+        <property name="hibernate.c3p0.preferredTestQuery">SELECT 1</property>
+        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>-->
+        
+        <property name="hibernate.transaction.auto_close_session">true</property>        
+        <!-- Aqui van las configuraciones para el uso del driver de mysql -->
+        <property name="hibernate.jdbc.batch_size">200</property>
+        <!-- Aqui van los objetos mapeados de las tablas de la base de datos-->
+        
     <mapping resource="pos/stalupita/model/Inventario.hbm.xml"/>
     <mapping resource="pos/stalupita/model/Ticket.hbm.xml"/>
     <mapping resource="pos/stalupita/model/DetalleTicket.hbm.xml"/>

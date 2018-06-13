@@ -5,8 +5,11 @@
  */
 package pos.stalupita.view;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
@@ -34,7 +37,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         initComponents();
         Utilities.setDialogIcon(this);
         this.jtxtCosto.addKeyListener(new AdapterNumericoFormatMak(this.jtxtCosto, 8, 2));
-        this.jtxtVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtVenta, 8, 2));
+        this.jtxtPrecioVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtPrecioVenta, 8, 2));
     }
 
     @Autowired
@@ -44,7 +47,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         Utilities.setDialogIcon(this);
         this.productoController = productoController;
         this.jtxtCosto.addKeyListener(new AdapterNumericoFormatMak(this.jtxtCosto, 8, 2));
-        this.jtxtVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtVenta, 8, 2));
+        this.jtxtPrecioVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtPrecioVenta, 8, 2));
     }
 
     /**
@@ -63,7 +66,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jtxtDescripcion = new javax.swing.JTextField();
-        jtxtVenta = new javax.swing.JTextField();
+        jtxtPrecioVenta = new javax.swing.JTextField();
         jtxtCosto = new javax.swing.JTextField();
         jcboxUme = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
@@ -91,6 +94,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Unidad de Medida:");
 
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(0, 51, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_x-32.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -102,6 +106,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
             }
         });
 
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(0, 51, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/save-32.png"))); // NOI18N
         btnGuardar.setText("Guardar");
@@ -114,14 +119,14 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         });
 
         jtxtDescripcion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jtxtDescripcion.setForeground(new java.awt.Color(0, 153, 255));
+        jtxtDescripcion.setForeground(new java.awt.Color(0, 0, 204));
         jtxtDescripcion.setText("Descripcion Producto");
 
-        jtxtVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jtxtVenta.setForeground(new java.awt.Color(0, 153, 255));
+        jtxtPrecioVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jtxtPrecioVenta.setForeground(new java.awt.Color(0, 0, 204));
 
         jtxtCosto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jtxtCosto.setForeground(new java.awt.Color(0, 153, 255));
+        jtxtCosto.setForeground(new java.awt.Color(0, 0, 204));
         jtxtCosto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtCostoFocusGained(evt);
@@ -129,14 +134,14 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
         });
 
         jcboxUme.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jcboxUme.setForeground(new java.awt.Color(0, 153, 255));
+        jcboxUme.setForeground(new java.awt.Color(0, 0, 204));
         jcboxUme.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Categoria:");
 
         jcboxCategoria.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jcboxCategoria.setForeground(new java.awt.Color(0, 153, 255));
+        jcboxCategoria.setForeground(new java.awt.Color(0, 0, 204));
         jcboxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,9 +156,11 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -166,9 +173,8 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
                             .addComponent(jcboxUme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcboxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtxtCosto, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtxtVenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
+                            .addComponent(jtxtCosto)
+                            .addComponent(jtxtPrecioVenta))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -196,8 +202,8 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtxtVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                    .addComponent(jtxtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,15 +231,36 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
     }//GEN-LAST:event_jtxtCostoFocusGained
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        if (this.validarCampos()) {
+            this.guardarProducto();
+            JOptionPane.showMessageDialog(null, "El producto ha sido guardado", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void guardarProducto() {
+        this.productoController.guardarProducto(this.getProductoGenerado());
+    }
 
     private Producto getProductoGenerado() {
         Producto producto = new Producto();
         producto.setIdproducto(0);
         producto.setUnidadMedida((UnidadMedida) this.jcboxUme.getSelectedItem());
         producto.setCategoria((Categoria) this.jcboxCategoria.getSelectedItem());
+        producto.setDescripcion(this.jtxtDescripcion.getText());
+        producto.setCosto(new BigDecimal(this.jtxtCosto.getText()));
+        producto.setPrecio(new BigDecimal(this.jtxtPrecioVenta.getText()));
+        producto.setEstado(true);
+        producto.setCreatedAt(new Date());
         return producto;
+    }
+
+    private boolean validarCampos() {
+        return !this.jtxtDescripcion.getText().isEmpty()
+                && !this.jtxtCosto.getText().isEmpty()
+                && !this.jtxtPrecioVenta.getText().isEmpty();
     }
 
     @Override
@@ -274,6 +301,6 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
     private javax.swing.JComboBox jcboxUme;
     private javax.swing.JTextField jtxtCosto;
     private javax.swing.JTextField jtxtDescripcion;
-    private javax.swing.JTextField jtxtVenta;
+    private javax.swing.JTextField jtxtPrecioVenta;
     // End of variables declaration//GEN-END:variables
 }

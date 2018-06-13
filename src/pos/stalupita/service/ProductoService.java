@@ -9,7 +9,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import pos.stalupita.model.Categoria;
+import pos.stalupita.model.Producto;
 import pos.stalupita.model.UnidadMedida;
+import pos.stalupita.repository.GenericDAOI;
 import pos.stalupita.repository.ProductoDAOI;
 
 /**
@@ -21,6 +23,8 @@ public class ProductoService {
 
     @Resource
     private ProductoDAOI productoDAOI;
+    @Resource
+    private GenericDAOI genericDAOI;
 
     public List<Categoria> getAllCategorias() {
         return this.productoDAOI.getAllCategorias();
@@ -28,6 +32,10 @@ public class ProductoService {
 
     public List<UnidadMedida> getAllUmes() {
         return this.productoDAOI.getAllUMEs();
+    }
+
+    public void guardarProducto(Producto productoGenerado) {
+        this.genericDAOI.save(productoGenerado);
     }
 
 }

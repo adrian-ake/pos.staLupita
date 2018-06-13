@@ -5,23 +5,14 @@
  */
 package pos.stalupita.repository;
 
-import java.util.List;
-
 /**
  *
  * @author adrian.ake
  */
 public interface GenericDAOI {
 
-    public List<Object> getAllObjects();
+    public void saveOrUpdate(Object obj);
 
-    public Object getObjectbyID(Integer id);
-
-    public Object getObjectbyID(String id);
-
-    public void saveObject(Object object);
-
-    public void saveorUpdateObject(Object object);
-
-    public void updateObject(Object object);
+    public void save(Object obj);
+   
 }

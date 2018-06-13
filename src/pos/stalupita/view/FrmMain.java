@@ -16,21 +16,21 @@ import pos.stalupita.herramientas.Utilities;
  * @author adrian.ake
  */
 @Component
-public class jFrmMain extends javax.swing.JFrame {
+public class FrmMain extends javax.swing.JFrame {
 
     @Resource
-    private JdlgPrincipal jdlgPrincipal;
+    private DlgPrincipal jdlgPrincipal;
 
     /**
      * Creates new form jFrmMain
      */
-    public jFrmMain() {
+    public FrmMain() {
         initComponents();
         Utilities.setFrameIcon(this);
     }
 
     @Autowired
-    public jFrmMain(JdlgPrincipal jdlgPrincipal) {
+    public FrmMain(DlgPrincipal jdlgPrincipal) {
         initComponents();
         Utilities.setFrameIcon(this);
         this.jdlgPrincipal = jdlgPrincipal;

@@ -24,7 +24,7 @@ import pos.stalupita.model.UnidadMedida;
  * @author adrian.ake
  */
 @Component(value = "prototype")
-public class JdlgRegistrar_prod extends javax.swing.JDialog {
+public class DlgRegistrar_prod extends javax.swing.JDialog {
 
     @Resource
     private ProductoController productoController;
@@ -32,7 +32,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
     /**
      * Creates new form JdlgRegistrar_prod
      */
-    public JdlgRegistrar_prod(java.awt.Frame parent, boolean modal) {
+    public DlgRegistrar_prod(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         Utilities.setDialogIcon(this);
@@ -41,7 +41,7 @@ public class JdlgRegistrar_prod extends javax.swing.JDialog {
     }
 
     @Autowired
-    public JdlgRegistrar_prod(ProductoController productoController) {
+    public DlgRegistrar_prod(ProductoController productoController) {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);

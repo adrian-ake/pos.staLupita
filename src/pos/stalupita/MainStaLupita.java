@@ -8,8 +8,8 @@ package pos.stalupita;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import pos.stalupita.herramientas.SpringContextLoad;
-import pos.stalupita.view.JdlgPrincipal;
-import pos.stalupita.view.jFrmMain;
+import pos.stalupita.view.DlgPrincipal;
+import pos.stalupita.view.FrmMain;
 
 /**
  *
@@ -18,7 +18,7 @@ import pos.stalupita.view.jFrmMain;
 public class MainStaLupita {
 
     public static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(MainStaLupita.class.getName());
-    private jFrmMain frmPrincipal = null;
+    private FrmMain frmPrincipal = null;
 
     /**
      * @param args the command line arguments
@@ -30,17 +30,17 @@ public class MainStaLupita {
     }
 
     private void lanzarInicio() {
-        JdlgPrincipal dashPrincipal = SpringContextLoad.getContext().getBean(JdlgPrincipal.class);
-        new JdlgPrincipal(this.getFrmPrincipal(), true);
+        DlgPrincipal dashPrincipal = SpringContextLoad.getContext().getBean(DlgPrincipal.class);
+        new DlgPrincipal(this.getFrmPrincipal(), true);
         Rectangle maxBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         dashPrincipal.setLocationRelativeTo(this.getFrmPrincipal());
         dashPrincipal.setBounds(maxBounds);
         dashPrincipal.setVisible(true);
     }
 
-    public jFrmMain getFrmPrincipal() {
+    public FrmMain getFrmPrincipal() {
         if (frmPrincipal == null) {
-            frmPrincipal = SpringContextLoad.getContext().getBean(jFrmMain.class);
+            frmPrincipal = SpringContextLoad.getContext().getBean(FrmMain.class);
             frmPrincipal.setLocationRelativeTo(null);
         }
         return frmPrincipal;

@@ -16,15 +16,15 @@ import pos.stalupita.herramientas.Utilities;
  * @author adrian.ake
  */
 @Component(value = "singleton")
-public class JdlgPrincipal extends javax.swing.JDialog {
+public class DlgPrincipal extends javax.swing.JDialog {
 
     @Resource
-    private JdlgRegistrar_prod jdlgRegistrar_prod;
+    private DlgRegistrar_prod jdlgRegistrar_prod;
 
     /**
      * Creates new form jdlgPrincipal
      */
-    public JdlgPrincipal(java.awt.Frame parent, boolean modal) {
+    public DlgPrincipal(java.awt.Frame parent, boolean modal) {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);
@@ -32,7 +32,7 @@ public class JdlgPrincipal extends javax.swing.JDialog {
     }
 
     @Autowired
-    public JdlgPrincipal() {
+    public DlgPrincipal() {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);

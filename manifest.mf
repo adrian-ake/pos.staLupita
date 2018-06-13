@@ -1,3 +1,10 @@
 Manifest-Version: 1.0
-X-COMMENT: Main-Class will be added automatically by build
+Ant-Version: Apache Ant 1.9.4
+Created-By: 1.7.0_65-b19 (Oracle Corporation)
+Proyecto: POS_StaLupita
+Version: 1.0.0
+FechaCompilacion: 2018-06-13 12:50:41 CDT
+TituloImplementacion: POS_StaLupita
+VersionImplementacion: 1.0.0${svna.version}
+URLProyecto: https://github.com/adrian-ake/pos.staLupita
 

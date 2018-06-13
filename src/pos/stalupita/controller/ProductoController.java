@@ -34,4 +34,8 @@ public class ProductoController {
     public void guardarProducto(Producto productoGenerado) {
         this.productoService.guardarProducto(productoGenerado);
     }
+
+    public List<Producto> getAllProductos() {
+        return this.productoService.getAllProductos();
+    }
 }

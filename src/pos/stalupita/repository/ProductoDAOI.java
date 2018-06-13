@@ -7,6 +7,7 @@ package pos.stalupita.repository;
 
 import java.util.List;
 import pos.stalupita.model.Categoria;
+import pos.stalupita.model.Producto;
 import pos.stalupita.model.UnidadMedida;
 
 /**
@@ -22,4 +23,6 @@ public interface ProductoDAOI {
     public List<UnidadMedida> getAllUMEs();
 
     public UnidadMedida getUMEbyId(String idume);
+
+    public List<Producto> getAllProductos();
 }

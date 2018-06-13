@@ -5,7 +5,6 @@
  */
 package pos.stalupita.view;
 
-import java.awt.Frame;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +19,8 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
     @Resource
     private DlgRegistrar_prod jdlgRegistrar_prod;
+    @Resource
+    private DlgAdminProductos dlgAdminProductos;
 
     /**
      * Creates new form jdlgPrincipal
@@ -67,6 +68,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmitemRegistrar = new javax.swing.JMenuItem();
@@ -226,10 +228,13 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
+        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Punto de Venta");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Account_1891016.png"))); // NOI18N
 
         javax.swing.GroupLayout jpnlFondoVerdeLayout = new javax.swing.GroupLayout(jpnlFondoVerde);
         jpnlFondoVerde.setLayout(jpnlFondoVerdeLayout);
@@ -238,14 +243,18 @@ public class DlgPrincipal extends javax.swing.JDialog {
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
                 .addGap(326, 326, 326)
                 .addComponent(jLabel1)
-                .addContainerGap(525, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 481, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addContainerGap())
         );
         jpnlFondoVerdeLayout.setVerticalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
@@ -278,7 +287,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(41, 107, 189));
@@ -304,6 +313,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
         jmitemAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Checklist_379508.png"))); // NOI18N
         jmitemAdministrar.setText("Administrar");
+        jmitemAdministrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitemAdministrarActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmitemAdministrar);
 
         jMenuBar1.add(jMenu1);
@@ -375,6 +389,12 @@ public class DlgPrincipal extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jmitemventasActionPerformed
 
+    private void jmitemAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemAdministrarActionPerformed
+        dlgAdminProductos.setModal(true);
+        dlgAdminProductos.setLocationRelativeTo(this);
+        dlgAdminProductos.setVisible(true);
+    }//GEN-LAST:event_jmitemAdministrarActionPerformed
+
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
@@ -390,6 +410,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pos.stalupita.model.Categoria;
+import pos.stalupita.model.Producto;
 import pos.stalupita.model.UnidadMedida;
 
 /**
@@ -28,6 +29,27 @@ public class ProductoRepository implements ProductoDAOI {
     @Autowired
     public ProductoRepository(SessionFactory sessionfactoryr) {
         this.sessionFactory = sessionfactoryr;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public Session getSession() {
+        Session session = null;
+        if (this.getSessionFactory().getCurrentSession() == null) {
+            session = this.getSessionFactory().openSession();
+        } else {
+            session = this.getSessionFactory().getCurrentSession();
+        }
+        if (!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
+        return session;
     }
 
     @Override
@@ -60,25 +82,11 @@ public class ProductoRepository implements ProductoDAOI {
         return (UnidadMedida) sqlQuery.uniqueResult();
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public Session getSession() {
-        Session session = null;
-        if (this.getSessionFactory().getCurrentSession() == null) {
-            session = this.getSessionFactory().openSession();
-        } else {
-            session = this.getSessionFactory().getCurrentSession();
-        }
-        if (!session.getTransaction().isActive()) {
-            session.beginTransaction();
-        }
-        return session;
+    @Override
+    public List<Producto> getAllProductos() {
+        String query = "SELECT * FROM stalupita.producto WHERE estado= 1";
+        SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Producto.class);
+        return sqlQuery.list();
     }
 
 }

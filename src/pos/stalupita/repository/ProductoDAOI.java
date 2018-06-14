@@ -25,4 +25,6 @@ public interface ProductoDAOI {
     public UnidadMedida getUMEbyId(String idume);
 
     public List<Producto> getAllProductos();
+
+    public List<Producto> getAllProductosActivos();
 }

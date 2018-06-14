@@ -10,17 +10,23 @@
 <project name="pos.staLupita" default="default" basedir=".">
     <description>Builds, tests, and runs the project pos.staLupita.</description>
     <import file="nbproject/build-impl.xml"/>
+        
     <target name="-pre-init">
         <property name="project.name" value="POS_StaLupita" />
         <property name="version.num" value="1.0.0" />
+        <property name="autor.name" value="Adrian Alonso Ake Ek" />
+        
         <tstamp>
             <format property="NOW" pattern="yyyy-MM-dd HH:mm:ss z" />
-        </tstamp>        
-        <echo>Revision found from SVN: ${svna.version}</echo>
+        </tstamp>                
         <property name="dist.jar" value="ejecutable/${project.name}_Version${version.num}.jar" />
-        <manifest file="MANIFEST.MF">
-            <attribute name="Proyecto" value="${project.name}" />           
+        
+        
+        
+        <manifest file="MANIFEST.MF">            
+            <attribute name="Proyecto" value="${project.name}" />                       
             <attribute name="Version" value="${version.num}" />
+            <attribute name="Desarrollador" value="${autor.name}" />           
             <attribute name="FechaCompilacion" value="${NOW}" />            
             <attribute name="TituloImplementacion" value="${project.name}" />
             <attribute name="VersionImplementacion" value="${version.num}${svna.version}" />

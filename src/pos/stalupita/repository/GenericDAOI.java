@@ -14,5 +14,7 @@ public interface GenericDAOI {
     public void saveOrUpdate(Object obj);
 
     public void save(Object obj);
-   
+
+    public void remove(Object obj);
+
 }

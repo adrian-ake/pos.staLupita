@@ -62,4 +62,13 @@ public class GenericRepository implements GenericDAOI {
         this.getSession().getTransaction().commit();
     }
 
+    @Override
+    public void remove(Object obj) {
+        this.getSession().flush();
+        this.getSession().clear();
+
+        this.getSession().delete(obj);
+        this.getSession().getTransaction().commit();
+    }
+
 }

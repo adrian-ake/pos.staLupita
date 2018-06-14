@@ -84,9 +84,15 @@ public class ProductoRepository implements ProductoDAOI {
 
     @Override
     public List<Producto> getAllProductos() {
-        String query = "SELECT * FROM stalupita.producto WHERE estado= 1";
+        String query = "SELECT * FROM stalupita.producto";
         SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Producto.class);
         return sqlQuery.list();
     }
 
+    @Override
+    public List<Producto> getAllProductosActivos() {
+        String query = "SELECT * FROM stalupita.producto WHERE estado= 1";
+        SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Producto.class);
+        return sqlQuery.list();
+    }
 }

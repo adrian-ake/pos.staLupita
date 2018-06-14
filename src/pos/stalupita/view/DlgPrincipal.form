@@ -31,7 +31,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmitemRegistrar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/stalupita/view/resources/if_Add_create_new_more_plus_1886085.png"/>
+                  <Image iconType="3" name="/pos/stalupita/view/resources/07_plus-24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registrar"/>
               </Properties>
@@ -50,7 +50,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmitemAdministrar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pos/stalupita/view/resources/if_Checklist_379508.png"/>
+                  <Image iconType="3" name="/pos/stalupita/view/resources/06_menu_bullet-24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Administrar"/>
               </Properties>

@@ -5,15 +5,25 @@
  */
 package pos.stalupita.view;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
 import pos.stalupita.herramientas.AdapterNumericoFormatMak;
+import pos.stalupita.herramientas.RoundedBorderBtn;
 import pos.stalupita.herramientas.Utilities;
 import pos.stalupita.model.Categoria;
 import pos.stalupita.model.Producto;
@@ -29,6 +39,8 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     @Resource
     private ProductoController productoController;
 
+    private Producto producto_edition = null;
+
     /**
      * Creates new form JdlgRegistrar_prod
      */
@@ -38,6 +50,8 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         Utilities.setDialogIcon(this);
         this.jtxtCosto.addKeyListener(new AdapterNumericoFormatMak(this.jtxtCosto, 8, 2));
         this.jtxtPrecioVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtPrecioVenta, 8, 2));
+        this.setMnemonic();
+        this.cargarComponents();
     }
 
     @Autowired
@@ -48,6 +62,13 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         this.productoController = productoController;
         this.jtxtCosto.addKeyListener(new AdapterNumericoFormatMak(this.jtxtCosto, 8, 2));
         this.jtxtPrecioVenta.addKeyListener(new AdapterNumericoFormatMak(this.jtxtPrecioVenta, 8, 2));
+        this.setMnemonic();
+        this.cargarComponents();
+    }
+
+    private void cargarComponents() {
+        this.btnGuardar.setBorder(new RoundedBorderBtn(8));
+        this.btnCancelar.setBorder(new RoundedBorderBtn(8));
     }
 
     /**
@@ -71,7 +92,6 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         jcboxUme = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jcboxCategoria = new javax.swing.JComboBox();
-        jlblIdProducto = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -79,26 +99,29 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
             }
         });
 
-        jblTitulo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jblTitulo.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jblTitulo.setForeground(new java.awt.Color(0, 51, 153));
         jblTitulo.setText("Registrar Producto");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(73, 80, 87));
         jLabel2.setText("Descripcion:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(73, 80, 87));
         jLabel3.setText("Costo(Compra) $ :");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(73, 80, 87));
         jLabel4.setText("Precio(Venta) $ :");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(73, 80, 87));
         jLabel5.setText("Unidad de Medida:");
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(0, 51, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_x-32.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("<html><center><b>Cancelar</b> &nbsp<font color = blue>(ESC)</font> </center></html>");
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +131,8 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         });
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(0, 51, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/save-32.png"))); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("<html><center><b>Guardar</b> &nbsp<font color = blue>(Alt + G)</font> </center></html>");
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,11 +142,11 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         });
 
         jtxtDescripcion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jtxtDescripcion.setForeground(new java.awt.Color(0, 0, 204));
+        jtxtDescripcion.setForeground(new java.awt.Color(33, 37, 41));
         jtxtDescripcion.setText("Descripcion Producto");
 
         jtxtPrecioVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jtxtPrecioVenta.setForeground(new java.awt.Color(0, 0, 204));
+        jtxtPrecioVenta.setForeground(new java.awt.Color(33, 37, 41));
         jtxtPrecioVenta.setText("0.00");
         jtxtPrecioVenta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -133,7 +155,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         });
 
         jtxtCosto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jtxtCosto.setForeground(new java.awt.Color(0, 0, 204));
+        jtxtCosto.setForeground(new java.awt.Color(33, 37, 41));
         jtxtCosto.setText("0.00");
         jtxtCosto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -142,14 +164,15 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         });
 
         jcboxUme.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jcboxUme.setForeground(new java.awt.Color(0, 0, 204));
+        jcboxUme.setForeground(new java.awt.Color(33, 37, 41));
         jcboxUme.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(73, 80, 87));
         jLabel6.setText("Categoria:");
 
         jcboxCategoria.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jcboxCategoria.setForeground(new java.awt.Color(0, 0, 204));
+        jcboxCategoria.setForeground(new java.awt.Color(33, 37, 41));
         jcboxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,17 +184,8 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 .addComponent(jblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(158, 158, 158))
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlblIdProducto)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -186,20 +200,22 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                             .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtxtCosto)
                             .addComponent(jtxtPrecioVenta))
-                        .addGap(25, 25, 25))))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jblTitulo)
-                .addGap(17, 17, 17)
-                .addComponent(jlblIdProducto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel2))
+                    .addComponent(jLabel2)
                     .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -217,11 +233,11 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtxtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(27, 27, 27))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,7 +275,11 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     }//GEN-LAST:event_jtxtPrecioVentaFocusGained
 
     private void guardarProducto() {
-        this.productoController.guardarUpdProducto(this.getProductoGenerado());
+        if (this.getProducto_edition() != null) {//es modificacion
+            this.productoController.guardarUpdProducto(this.getProductoGenerado());
+        } else {
+            this.productoController.guardarProducto(this.getProductoGenerado());
+        }
     }
 
     public void setTitulo(String titulo) {
@@ -268,14 +288,21 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
 
     private Producto getProductoGenerado() {
         Producto producto = new Producto();
-        producto.setIdproducto(Integer.valueOf(this.jlblIdProducto.getText()));
         producto.setUnidadMedida((UnidadMedida) this.jcboxUme.getSelectedItem());
         producto.setCategoria((Categoria) this.jcboxCategoria.getSelectedItem());
         producto.setDescripcion(this.jtxtDescripcion.getText());
         producto.setCosto(new BigDecimal(this.jtxtCosto.getText()));
         producto.setPrecio(new BigDecimal(this.jtxtPrecioVenta.getText()));
         producto.setEstado(true);
-        producto.setCreatedAt(new Date());
+
+        if (this.getProducto_edition() != null) {//es modificacion
+            producto.setIdproducto(this.getProducto_edition().getIdproducto());
+            producto.setCreatedAt(this.getProducto_edition().getCreatedAt());
+            producto.setUpdatedAt(new Date());
+        } else {//es nuevo producto
+            producto.setIdproducto(0);//auto_increment           
+            producto.setCreatedAt(new Date());
+        }
         return producto;
     }
 
@@ -289,7 +316,6 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     public void setVisible(boolean b) {
         this.jtxtDescripcion.selectAll();
         this.jtxtDescripcion.setFocusable(true);
-        this.jlblIdProducto.setVisible(false);
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -297,12 +323,10 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         this.jtxtDescripcion.setText("Descripcion Producto");
         this.jtxtCosto.setText("0.00");
         this.jtxtPrecioVenta.setText("0.00");
-        this.jlblIdProducto.setText("0");
         cargarCombos();
     }
 
     public void setEditProducto(Producto producto) {
-        this.jlblIdProducto.setText(producto.getIdproducto().toString());
         this.jtxtDescripcion.setText(producto.getDescripcion());
         this.jtxtCosto.setText(producto.getCosto().toString());
         this.jtxtPrecioVenta.setText(producto.getPrecio().toString());
@@ -336,9 +360,52 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     private javax.swing.JLabel jblTitulo;
     private javax.swing.JComboBox jcboxCategoria;
     private javax.swing.JComboBox jcboxUme;
-    private javax.swing.JLabel jlblIdProducto;
     private javax.swing.JTextField jtxtCosto;
     private javax.swing.JTextField jtxtDescripcion;
     private javax.swing.JTextField jtxtPrecioVenta;
     // End of variables declaration//GEN-END:variables
+
+    public Producto getProducto_edition() {
+        return producto_edition;
+    }
+
+    public void setProducto_edition(Producto producto_edition) {
+        this.producto_edition = producto_edition;
+    }
+
+    public final void setMnemonic() {
+        getActionMap(btnGuardar, "guardar", KeyEvent.VK_G);
+        getActionMap(btnCancelar, "cerrar", KeyEvent.VK_ESCAPE);
+        btnGuardar.setMnemonic(KeyEvent.VK_G);
+    }
+
+    public void getActionMap(JComponent componente, String nombreAccion, int tecla) {
+        componente.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(tecla, 0), nombreAccion);
+        componente.getActionMap().put(nombreAccion,
+                newAbstractAction(nombreAccion));
+    }
+
+    public AbstractAction newAbstractAction(String nombreAccion) {
+        if (nombreAccion.equals("cerrar")) {
+            return new AbstractAction(nombreAccion) {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    if (btnCancelar.isEnabled()) {
+                        btnCancelarActionPerformed(evt);
+                    }
+                }
+            };
+        } else if (nombreAccion.equals("guardar")) {
+            return new AbstractAction(nombreAccion) {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    if (btnGuardar.isEnabled()) {
+                        btnGuardarActionPerformed(evt);
+                    }
+                }
+            };
+        }
+        return null;
+    }
 }

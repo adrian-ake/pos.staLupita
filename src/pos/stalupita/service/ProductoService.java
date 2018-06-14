@@ -46,4 +46,12 @@ public class ProductoService {
         return this.productoDAOI.getAllProductos();
     }
 
+    public void eliminarProducto(Producto producto_del) {
+        this.genericDAOI.remove(producto_del);
+    }
+
+    public List<Producto> getAllProductosActivos() {
+        return this.productoDAOI.getAllProductosActivos();
+    }
+
 }

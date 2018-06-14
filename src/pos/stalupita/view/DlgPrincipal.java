@@ -298,7 +298,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/OFFice-70-4-48.png"))); // NOI18N
         jMenu1.setText("Producto");
 
-        jmitemRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Add_create_new_more_plus_1886085.png"))); // NOI18N
+        jmitemRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_plus-24.png"))); // NOI18N
         jmitemRegistrar.setText("Registrar");
         jmitemRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,7 +311,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jmitemInventario.setText("Inventario");
         jMenu1.add(jmitemInventario);
 
-        jmitemAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Checklist_379508.png"))); // NOI18N
+        jmitemAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/06_menu_bullet-24.png"))); // NOI18N
         jmitemAdministrar.setText("Administrar");
         jmitemAdministrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

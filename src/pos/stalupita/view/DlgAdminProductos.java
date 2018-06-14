@@ -5,15 +5,19 @@
  */
 package pos.stalupita.view;
 
+import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
 import pos.stalupita.herramientas.Utilities;
 import pos.stalupita.model.Producto;
+import pos.stalupita.tablemodels.TableModelCatProductos;
 
 /**
  *
@@ -61,6 +65,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jtbCatlProductos = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jchckVerEliminados = new javax.swing.JCheckBox();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -71,7 +76,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jpnlFondoGris.setBackground(new java.awt.Color(119, 136, 152));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Opciones", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(4, 151, 135), 2), "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         btnNuevoTicket3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
@@ -107,6 +112,11 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnNuevoTicket8.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnNuevoTicket8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevoTicket8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevoTicket8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoTicket8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,7 +142,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBackground(new java.awt.Color(4, 151, 135));
+        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(4, 151, 135), 5, true));
 
         jtbCatlProductos.setModel(tableModelCatProductos1);
         jScrollPane1.setViewportView(jtbCatlProductos);
@@ -161,17 +172,29 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jchckVerEliminados.setBackground(new java.awt.Color(119, 136, 152));
+        jchckVerEliminados.setForeground(new java.awt.Color(255, 255, 255));
+        jchckVerEliminados.setText("Mostrar Eliminados");
+        jchckVerEliminados.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jchckVerEliminadosStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
         jpnlFondoGris.setLayout(jpnlFondoGrisLayout);
         jpnlFondoGrisLayout.setHorizontalGroup(
             jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
-                    .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jchckVerEliminados)
+                    .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+                            .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(50, 50, 50))
         );
         jpnlFondoGrisLayout.setVerticalGroup(
@@ -183,7 +206,9 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jchckVerEliminados)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
@@ -205,27 +230,69 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         this.jdlgRegistrar_prod.setTitulo("Registrar Producto");
         this.jdlgRegistrar_prod.resetDatos();
         this.jdlgRegistrar_prod.setVisible(true);
-        this.cargarDatos();
+        this.cargarProductosActivos();
     }//GEN-LAST:event_btnNuevoTicket6ActionPerformed
 
     private void btnNuevoTicket3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket3ActionPerformed
         if (this.validacionXSeleccion()) {
             this.editarProducto();
-            this.cargarDatos();
+            this.cargarProductosActivos();
         } else {
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas editar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnNuevoTicket3ActionPerformed
 
-    private void cargarDatos() {
+    private void btnNuevoTicket8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket8ActionPerformed
+        if (this.validacionXSeleccion()) {
+            this.eliminarProducto();
+            JOptionPane.showMessageDialog(this, "El producto ha sido eliminado", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
+            this.cargarProductosActivos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Elige el producto que deseas Eliminar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnNuevoTicket8ActionPerformed
+
+    private void jchckVerEliminadosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jchckVerEliminadosStateChanged
+        if (this.jchckVerEliminados.isSelected()) {
+            this.cargarTodosProductos();
+        } else {
+            this.cargarProductosActivos();
+        }
+    }//GEN-LAST:event_jchckVerEliminadosStateChanged
+
+    private void cargarTodosProductos() {
+        this.tableModelCatProductos1 = new TableModelCatProductos();
+        this.jtbCatlProductos.setModel(tableModelCatProductos1);
+
         this.tableModelCatProductos1.change(new ArrayList<Producto>());
         List<Producto> productos = this.productoController.getAllProductos();
         this.tableModelCatProductos1.change(productos);
+
+        TableColumn columna_0 = this.jtbCatlProductos.getColumnModel().getColumn(0);//col id
+        columna_0.setMaxWidth(30);
+    }
+
+    private void cargarProductosActivos() {
+        this.tableModelCatProductos1 = new TableModelCatProductos();
+        this.jtbCatlProductos.setModel(this.tableModelCatProductos1);
+
+        this.tableModelCatProductos1.change(new ArrayList<Producto>());
+        List<Producto> productos = this.productoController.getAllProductosActivos();
+        this.tableModelCatProductos1.change(productos);
+
+        TableColumn columna_0 = this.jtbCatlProductos.getColumnModel().getColumn(0);//col id
+        columna_0.setMaxWidth(30);
+
+        TableColumn columna_8 = this.jtbCatlProductos.getColumnModel().getColumn(8);
+        this.jtbCatlProductos.getColumnModel().removeColumn(columna_8);
     }
 
     @Override
     public void setVisible(boolean b) {
-        this.cargarDatos();
+        this.cargarProductosActivos();
+
+        this.jtbCatlProductos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 13));
+
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -237,6 +304,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JCheckBox jchckVerEliminados;
     private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
     private javax.swing.JTable jtbCatlProductos;
@@ -246,13 +314,17 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private void editarProducto() {
         Integer index_selected = this.jtbCatlProductos.getSelectedRow();
         Producto producto_edit = this.getProductoXIndex(index_selected);
-
-        this.jdlgRegistrar_prod.setModal(true);
-        this.jdlgRegistrar_prod.setLocationRelativeTo(this);
-        this.jdlgRegistrar_prod.setTitulo("Editar Producto");
-        this.jdlgRegistrar_prod.resetDatos();
-        this.jdlgRegistrar_prod.setEditProducto(producto_edit);
-        this.jdlgRegistrar_prod.setVisible(true);
+        if (producto_edit.getEstado()) {
+            this.jdlgRegistrar_prod.setModal(true);
+            this.jdlgRegistrar_prod.setLocationRelativeTo(this);
+            this.jdlgRegistrar_prod.setTitulo("Editar Producto");
+            this.jdlgRegistrar_prod.resetDatos();
+            this.jdlgRegistrar_prod.setEditProducto(producto_edit);
+            this.jdlgRegistrar_prod.setProducto_edition(producto_edit);
+            this.jdlgRegistrar_prod.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Los productos eliminados no pueden ser editados", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private boolean validacionXSeleccion() {
@@ -262,6 +334,18 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
     public Producto getProductoXIndex(Integer index) {
         return this.tableModelCatProductos1.get(index);
+    }
+
+    private void eliminarProducto() {
+        Integer index_selected = this.jtbCatlProductos.getSelectedRow();
+        Producto producto_del = this.getProductoXIndex(index_selected);
+        String mensaje = "¿Está seguro que desea Eliminar el producto"
+                + " " + producto_del.getDescripcion() + " ?";
+        if (JOptionPane.showConfirmDialog(null, mensaje, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+            producto_del.setDeletedAt(new Date());
+            producto_del.setEstado(false);
+            this.productoController.guardarUpdProducto(producto_del);
+        }
     }
 
 }

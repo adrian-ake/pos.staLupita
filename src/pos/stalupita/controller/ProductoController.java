@@ -42,4 +42,12 @@ public class ProductoController {
     public List<Producto> getAllProductos() {
         return this.productoService.getAllProductos();
     }
+
+    public List<Producto> getAllProductosActivos() {
+        return this.productoService.getAllProductosActivos();
+    }
+
+    public void eliminarProducto(Producto producto_del) {
+        this.productoService.eliminarProducto(producto_del);
+    }
 }

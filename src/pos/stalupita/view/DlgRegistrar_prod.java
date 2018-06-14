@@ -144,6 +144,11 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         jtxtDescripcion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtDescripcion.setForeground(new java.awt.Color(33, 37, 41));
         jtxtDescripcion.setText("Descripcion Producto");
+        jtxtDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtDescripcionFocusGained(evt);
+            }
+        });
 
         jtxtPrecioVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtPrecioVenta.setForeground(new java.awt.Color(33, 37, 41));
@@ -273,6 +278,10 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     private void jtxtPrecioVentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPrecioVentaFocusGained
         this.jtxtPrecioVenta.selectAll();
     }//GEN-LAST:event_jtxtPrecioVentaFocusGained
+
+    private void jtxtDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDescripcionFocusGained
+       this.jtxtDescripcion.selectAll();
+    }//GEN-LAST:event_jtxtDescripcionFocusGained
 
     private void guardarProducto() {
         if (this.getProducto_edition() != null) {//es modificacion

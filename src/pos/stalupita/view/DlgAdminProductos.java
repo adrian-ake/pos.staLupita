@@ -6,15 +6,22 @@
 package pos.stalupita.view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.table.TableColumn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
+import pos.stalupita.herramientas.RoundedBorderBtn;
 import pos.stalupita.herramientas.Utilities;
 import pos.stalupita.model.Producto;
 import pos.stalupita.tablemodels.TableModelCatProductos;
@@ -38,6 +45,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);
+        this.setMnemonic();
+        this.cargarComponents();
     }
 
     @Autowired
@@ -45,6 +54,63 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);
+        this.setMnemonic();
+        this.cargarComponents();
+    }
+
+    private void cargarComponents() {
+        this.btnNuevoProducto.setBorder(new RoundedBorderBtn(8));
+        this.btnEditarProducto.setBorder(new RoundedBorderBtn(8));
+        this.btnEliminarProducto.setBorder(new RoundedBorderBtn(8));
+    }
+
+    public final void setMnemonic() {
+        getActionMap(btnNuevoProducto, "nuevo", KeyEvent.VK_N);
+        getActionMap(btnEditarProducto, "editar", KeyEvent.VK_M);
+        getActionMap(btnEliminarProducto, "eliminar", KeyEvent.VK_E);
+
+        btnNuevoProducto.setMnemonic(KeyEvent.VK_N);
+        btnEditarProducto.setMnemonic(KeyEvent.VK_M);
+        btnEliminarProducto.setMnemonic(KeyEvent.VK_E);
+    }
+
+    public void getActionMap(JComponent componente, String nombreAccion, int tecla) {
+        componente.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(tecla, 0), nombreAccion);
+        componente.getActionMap().put(nombreAccion,
+                newAbstractAction(nombreAccion));
+    }
+
+    public AbstractAction newAbstractAction(String nombreAccion) {
+        if (nombreAccion.equals("nuevo")) {
+            return new AbstractAction(nombreAccion) {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    if (btnNuevoProducto.isEnabled()) {
+                        btnNuevoProductoActionPerformed(evt);
+                    }
+                }
+            };
+        } else if (nombreAccion.equals("editar")) {
+            return new AbstractAction(nombreAccion) {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    if (btnEditarProducto.isEnabled()) {
+                        btnEditarProductoActionPerformed(evt);
+                    }
+                }
+            };
+        } else if (nombreAccion.equals("eliminar")) {
+            return new AbstractAction(nombreAccion) {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    if (btnEliminarProducto.isEnabled()) {
+                        btnEliminarProductoActionPerformed(evt);
+                    }
+                }
+            };
+        }
+        return null;
     }
 
     /**
@@ -58,9 +124,9 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         tableModelCatProductos1 = new pos.stalupita.tablemodels.TableModelCatProductos();
         jpnlFondoGris = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnNuevoTicket3 = new javax.swing.JButton();
-        btnNuevoTicket6 = new javax.swing.JButton();
-        btnNuevoTicket8 = new javax.swing.JButton();
+        btnEditarProducto = new javax.swing.JButton();
+        btnNuevoProducto = new javax.swing.JButton();
+        btnEliminarProducto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbCatlProductos = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
@@ -79,42 +145,42 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(4, 151, 135), 2), "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnNuevoTicket3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnNuevoTicket3.setForeground(new java.awt.Color(51, 102, 255));
-        btnNuevoTicket3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/09_pencil-48.png"))); // NOI18N
-        btnNuevoTicket3.setText("Editar Producto");
-        btnNuevoTicket3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnNuevoTicket3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNuevoTicket3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNuevoTicket3.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEditarProducto.setForeground(new java.awt.Color(51, 102, 255));
+        btnEditarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/09_pencil-48.png"))); // NOI18N
+        btnEditarProducto.setText("<html><center><b>Modificar</b> &nbsp<font color = blue>(Alt + M)</font> </center></html>");
+        btnEditarProducto.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnEditarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditarProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoTicket3ActionPerformed(evt);
+                btnEditarProductoActionPerformed(evt);
             }
         });
 
-        btnNuevoTicket6.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnNuevoTicket6.setForeground(new java.awt.Color(51, 102, 255));
-        btnNuevoTicket6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_plus-48.png"))); // NOI18N
-        btnNuevoTicket6.setText("Añadir Producto");
-        btnNuevoTicket6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnNuevoTicket6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNuevoTicket6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNuevoTicket6.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevoProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnNuevoProducto.setForeground(new java.awt.Color(51, 102, 255));
+        btnNuevoProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_plus-48.png"))); // NOI18N
+        btnNuevoProducto.setText("<html><center><b>Registrar</b> &nbsp<font color = blue>(Alt + N)</font> </center></html>");
+        btnNuevoProducto.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnNuevoProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevoProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoTicket6ActionPerformed(evt);
+                btnNuevoProductoActionPerformed(evt);
             }
         });
 
-        btnNuevoTicket8.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnNuevoTicket8.setForeground(new java.awt.Color(51, 102, 255));
-        btnNuevoTicket8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_trash-2-48.png"))); // NOI18N
-        btnNuevoTicket8.setText("Eliminar Producto");
-        btnNuevoTicket8.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnNuevoTicket8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnNuevoTicket8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNuevoTicket8.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEliminarProducto.setForeground(new java.awt.Color(51, 102, 255));
+        btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_trash-2-48.png"))); // NOI18N
+        btnEliminarProducto.setText("<html><center><b>Eliminar</b> &nbsp<font color = blue>(Alt + E)</font> </center></html>");
+        btnEliminarProducto.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnEliminarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEliminarProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoTicket8ActionPerformed(evt);
+                btnEliminarProductoActionPerformed(evt);
             }
         });
 
@@ -125,20 +191,20 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNuevoTicket3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNuevoTicket6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNuevoTicket8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEditarProducto)
+                    .addComponent(btnNuevoProducto)
+                    .addComponent(btnEliminarProducto))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnNuevoTicket6)
+                .addComponent(btnNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnNuevoTicket3)
+                .addComponent(btnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnNuevoTicket8)
+                .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -224,33 +290,32 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void btnNuevoTicket6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket6ActionPerformed
+    private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
         this.jdlgRegistrar_prod.setModal(true);
         this.jdlgRegistrar_prod.setLocationRelativeTo(this);
         this.jdlgRegistrar_prod.setTitulo("Registrar Producto");
         this.jdlgRegistrar_prod.resetDatos();
         this.jdlgRegistrar_prod.setVisible(true);
         this.cargarProductosActivos();
-    }//GEN-LAST:event_btnNuevoTicket6ActionPerformed
+    }//GEN-LAST:event_btnNuevoProductoActionPerformed
 
-    private void btnNuevoTicket3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket3ActionPerformed
+    private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProductoActionPerformed
         if (this.validacionXSeleccion()) {
             this.editarProducto();
             this.cargarProductosActivos();
         } else {
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas editar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnNuevoTicket3ActionPerformed
+    }//GEN-LAST:event_btnEditarProductoActionPerformed
 
-    private void btnNuevoTicket8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTicket8ActionPerformed
+    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
         if (this.validacionXSeleccion()) {
-            this.eliminarProducto();
-            JOptionPane.showMessageDialog(this, "El producto ha sido eliminado", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
+            this.eliminarProducto();            
             this.cargarProductosActivos();
         } else {
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas Eliminar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnNuevoTicket8ActionPerformed
+    }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void jchckVerEliminadosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jchckVerEliminadosStateChanged
         if (this.jchckVerEliminados.isSelected()) {
@@ -298,9 +363,9 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNuevoTicket3;
-    private javax.swing.JButton btnNuevoTicket6;
-    private javax.swing.JButton btnNuevoTicket8;
+    private javax.swing.JButton btnEditarProducto;
+    private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -345,6 +410,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             producto_del.setDeletedAt(new Date());
             producto_del.setEstado(false);
             this.productoController.guardarUpdProducto(producto_del);
+            JOptionPane.showMessageDialog(this, "El producto ha sido eliminado", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

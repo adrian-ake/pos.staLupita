@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -300,12 +302,12 @@ public class DlgPrincipal extends javax.swing.JDialog {
         });
 
         jtxtTotalVenta.setEditable(false);
-        jtxtTotalVenta.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jtxtTotalVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jtxtTotalVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtTotalVenta.setText("0.00");
 
         jtxtCantidadVenta.setEditable(false);
-        jtxtCantidadVenta.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jtxtCantidadVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jtxtCantidadVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtCantidadVenta.setText("0");
 
@@ -527,10 +529,52 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     private void btnCambiarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarCantidadActionPerformed
-        this.refrescarTotales();
+        if (this.validacionXSeleccion()) {
+            this.editarCantidadProducto();
+            this.cargarTicketPendiente();
+            this.refrescarTotales();
+        } else {
+            JOptionPane.showMessageDialog(this, "Elige el producto que deseas Editar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnCambiarCantidadActionPerformed
+    private void editarCantidadProducto() {        Integer index_selected = this.jtblDetalleTicket.getSelectedRow();
+        DetalleTicket detalleTicket = this.getDetailXIndex(index_selected);
+        String msg_html = "<html><center>"
+                + " Ingresa la nueva cantidad para "
+                + "<b>" + detalleTicket.getProducto().getDescripcion() + "</b> "
+                + "en " + detalleTicket.getProducto().getUnidadMedida().getDescripcion()
+                + "</center></html>";
+        JLabel jLabel = new JLabel(msg_html);
+        String cantidad_txt = JOptionPane.showInputDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
+        BigDecimal cantidad_prod = BigDecimal.ZERO;
+        try {
+            cantidad_prod = new BigDecimal(cantidad_txt);
+        } catch (Exception e) {
+        }
+        if (cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {//se ingreso una cantidad erronea
+            JOptionPane.showMessageDialog(this, "La cantidad para el producto " + detalleTicket.getProducto().getDescripcion()
+                    + " debe ser un numero valido y mayor a cero", "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.agruparProducto(detalleTicket, cantidad_prod);
+        }
+    }
+
+    public DetalleTicket getDetailXIndex(Integer index) {
+        return this.tableModelDetTicket1.get(index);
+    }
+
+    private boolean validacionXSeleccion() {
+        Integer index_selected = this.jtblDetalleTicket.getSelectedRow();
+        return index_selected != -1;
+    }
+
 
     private void btnEliminarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdutoActionPerformed
+        if (this.validacionXSeleccion()) {
+            this.refrescarTotales();
+        } else {
+            JOptionPane.showMessageDialog(this, "Elige el producto que deseas Eliminar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
         this.refrescarTotales();
     }//GEN-LAST:event_btnEliminarProdutoActionPerformed
 
@@ -581,6 +625,19 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JTextField jtxtTotalVenta;
     private pos.stalupita.tablemodels.TableModelDetTicket tableModelDetTicket1;
     // End of variables declaration//GEN-END:variables
+
+    private void agruparProducto(DetalleTicket agregadoDetalle, BigDecimal nueva_cantidad) {
+        BigDecimal total_vendido = agregadoDetalle.getProducto().getPrecio().multiply(nueva_cantidad).setScale(2, RoundingMode.HALF_UP);//total_vendido
+        BigDecimal total_comprado = agregadoDetalle.getProducto().getCosto().multiply(nueva_cantidad).setScale(2, RoundingMode.HALF_UP);//total_costo
+        BigDecimal total_ganado = total_vendido.subtract(total_comprado).setScale(2, RoundingMode.HALF_UP);//total_ganancia
+
+        agregadoDetalle.setTicket(this.getTicketActivo());
+        agregadoDetalle.setCantidad(nueva_cantidad);
+        agregadoDetalle.setTotal(total_vendido);
+        agregadoDetalle.setGanancia(total_ganado);
+
+        this.ticketController.actualizarDet(agregadoDetalle);
+    }
 
     private void agregarProducto(Producto producto_selecionado, BigDecimal cantidad_comprada) {
         Ticket ticket_pendiente = this.getTicketActivo();

@@ -76,6 +76,7 @@ DROP TABLE IF EXISTS ticket;
 CREATE TABLE ticket (
   idticket int(11) NOT NULL AUTO_INCREMENT primary key,
   total decimal(10,2)  NULL,
+  ganancia decimal(10,2)  NULL,
   pago decimal(10,2)  NULL,
   cambio decimal(10,2)  NULL,  
   fecha_registrado timestamp  NULL,
@@ -92,6 +93,7 @@ CREATE TABLE detalle_ticket (
   precio decimal(10,2)  NULL,
   cantidad decimal(10,2)  NULL,
   total decimal(10,2)  NULL,  
+  ganancia decimal(10,2)  NULL,
 foreign key (idticket) references ticket (idticket)  on delete cascade on update cascade,       
 foreign key (idproducto) references producto (idproducto)  on delete cascade on update cascade
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

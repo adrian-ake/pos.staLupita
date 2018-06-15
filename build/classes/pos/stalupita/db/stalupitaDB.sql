@@ -46,6 +46,7 @@ INSERT INTO stalupita.categoria VALUES(0,'Crecimiento Pavo',1);
 INSERT INTO stalupita.categoria VALUES(0,'Engorda Pavo',1);
 
 INSERT INTO stalupita.categoria VALUES(0,'Salvadillo Ganado',1);
+INSERT INTO stalupita.categoria VALUES(0,'Medicamentos',1);
 INSERT INTO stalupita.categoria VALUES(0,'Fertilizantes',1);
 INSERT INTO stalupita.categoria VALUES(0,'Herbicidas',1);
 INSERT INTO stalupita.categoria VALUES(0,'Granos(Maiz)',1);
@@ -75,6 +76,7 @@ DROP TABLE IF EXISTS ticket;
 CREATE TABLE ticket (
   idticket int(11) NOT NULL AUTO_INCREMENT primary key,
   total decimal(10,2)  NULL,
+  ganancia decimal(10,2)  NULL,
   pago decimal(10,2)  NULL,
   cambio decimal(10,2)  NULL,  
   fecha_registrado timestamp  NULL,
@@ -91,6 +93,7 @@ CREATE TABLE detalle_ticket (
   precio decimal(10,2)  NULL,
   cantidad decimal(10,2)  NULL,
   total decimal(10,2)  NULL,  
+  ganancia decimal(10,2)  NULL,
 foreign key (idticket) references ticket (idticket)  on delete cascade on update cascade,       
 foreign key (idproducto) references producto (idproducto)  on delete cascade on update cascade
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

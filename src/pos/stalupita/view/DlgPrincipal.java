@@ -5,8 +5,14 @@
  */
 package pos.stalupita.view;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -14,7 +20,11 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pos.stalupita.controller.TicketController;
 import pos.stalupita.herramientas.Utilities;
+import pos.stalupita.model.DetalleTicket;
+import pos.stalupita.model.Producto;
+import pos.stalupita.model.Ticket;
 
 /**
  *
@@ -30,6 +40,9 @@ public class DlgPrincipal extends javax.swing.JDialog {
     @Resource
     private DlgBusquedaProducto dlgBusquedaProducto;
 
+    @Resource
+    private TicketController ticketController;
+
     /**
      * Creates new form jdlgPrincipal
      */
@@ -42,12 +55,14 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }
 
     @Autowired
-    public DlgPrincipal() {
+    public DlgPrincipal(TicketController ticketController) {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);
         this.cargarConfigsVtana();
         this.setMnemonic();
+
+        this.ticketController = ticketController;
     }
 
     private void cargarConfigsVtana() {
@@ -142,6 +157,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tableModelDetTicket1 = new pos.stalupita.tablemodels.TableModelDetTicket();
         jpnlFondoGris = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnCambiarCantidad = new javax.swing.JButton();
@@ -152,10 +168,10 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         btnCancelarVenta = new javax.swing.JButton();
         btnPagarVenta = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jtxtTotalVenta = new javax.swing.JTextField();
+        jtxtCantidadVenta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtblDetalleTicket = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -283,13 +299,15 @@ public class DlgPrincipal extends javax.swing.JDialog {
             }
         });
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jTextField1.setText("0.00");
+        jtxtTotalVenta.setEditable(false);
+        jtxtTotalVenta.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jtxtTotalVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtTotalVenta.setText("0.00");
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jTextField2.setText("0");
+        jtxtCantidadVenta.setEditable(false);
+        jtxtCantidadVenta.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jtxtCantidadVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtCantidadVenta.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -299,12 +317,12 @@ public class DlgPrincipal extends javax.swing.JDialog {
                 .addGap(189, 189, 189)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtxtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addComponent(jtxtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(btnPagarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,8 +335,8 @@ public class DlgPrincipal extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,18 +347,9 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jtblDetalleTicket.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtblDetalleTicket.setModel(tableModelDetTicket1);
+        jScrollPane1.setViewportView(jtblDetalleTicket);
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
         jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -380,11 +389,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1014, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
                     .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 64, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 84, Short.MAX_VALUE))
         );
         jpnlFondoGrisLayout.setVerticalGroup(
             jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,26 +520,32 @@ public class DlgPrincipal extends javax.swing.JDialog {
         dlgBusquedaProducto.setModal(true);
         dlgBusquedaProducto.setLocationRelativeTo(this);
         dlgBusquedaProducto.setVisible(true);
+        if (!this.isNull(dlgBusquedaProducto.getProducto_selecionado()) && !this.isNull(dlgBusquedaProducto.getCantidad_comprada())) {
+            this.agregarProducto(dlgBusquedaProducto.getProducto_selecionado(), dlgBusquedaProducto.getCantidad_comprada());
+        }
+        this.refrescarTotales();
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     private void btnCambiarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarCantidadActionPerformed
-        // TODO add your handling code here:
+        this.refrescarTotales();
     }//GEN-LAST:event_btnCambiarCantidadActionPerformed
 
     private void btnEliminarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdutoActionPerformed
-        // TODO add your handling code here:
+        this.refrescarTotales();
     }//GEN-LAST:event_btnEliminarProdutoActionPerformed
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
-        // TODO add your handling code here:
+        this.refrescarTotales();
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
 
     private void btnPagarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarVentaActionPerformed
-        // TODO add your handling code here:
+        this.refrescarTotales();
     }//GEN-LAST:event_btnPagarVentaActionPerformed
 
     @Override
     public void setVisible(boolean b) {
+        this.jtblDetalleTicket.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 16));
+        this.cargarTicketPendiente();
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -551,9 +566,6 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JMenuItem jmitemAdministrar;
     private javax.swing.JMenuItem jmitemCompras;
     private javax.swing.JMenuItem jmitemGrafCompras;
@@ -564,5 +576,104 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JMenuItem jmitemventas;
     private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
+    private javax.swing.JTable jtblDetalleTicket;
+    private javax.swing.JTextField jtxtCantidadVenta;
+    private javax.swing.JTextField jtxtTotalVenta;
+    private pos.stalupita.tablemodels.TableModelDetTicket tableModelDetTicket1;
     // End of variables declaration//GEN-END:variables
+
+    private void agregarProducto(Producto producto_selecionado, BigDecimal cantidad_comprada) {
+        Ticket ticket_pendiente = this.getTicketActivo();
+        List<DetalleTicket> lista_detalles = this.ticketController.getDetfFromTckt(ticket_pendiente.getIdticket());
+        DetalleTicket nuevoDetalle = this.getNuevoDetalle(producto_selecionado, cantidad_comprada);
+        if (lista_detalles.contains(nuevoDetalle)) {//si esta en la lisa ->agrupa
+            int index_list = lista_detalles.indexOf(nuevoDetalle);
+            DetalleTicket agregadoDetalle = lista_detalles.get(index_list);
+            this.agruparProducto(agregadoDetalle, nuevoDetalle);
+        } else {
+            this.ticketController.guardarDetalleTicket(nuevoDetalle);
+        }
+        lista_detalles = this.ticketController.getDetfFromTckt(ticket_pendiente.getIdticket());
+        this.tableModelDetTicket1.change(new ArrayList<DetalleTicket>());
+        this.tableModelDetTicket1.change(lista_detalles);
+    }
+
+    private void agruparProducto(DetalleTicket agregadoDetalle, DetalleTicket nuevoDetalle) {
+
+        BigDecimal cantidad_final = agregadoDetalle.getCantidad().add(nuevoDetalle.getCantidad()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal total_final = agregadoDetalle.getTotal().add(nuevoDetalle.getTotal()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal ganancial_final = agregadoDetalle.getGanancia().add(nuevoDetalle.getGanancia()).setScale(2, RoundingMode.HALF_UP);
+
+        agregadoDetalle.setCantidad(cantidad_final);
+        agregadoDetalle.setTotal(total_final);
+        agregadoDetalle.setGanancia(ganancial_final);
+        this.ticketController.actualizarDet(agregadoDetalle);
+    }
+
+    private DetalleTicket getNuevoDetalle(Producto producto_selecionado, BigDecimal cantidad_comprada) {
+        BigDecimal total_vendido = producto_selecionado.getPrecio().multiply(cantidad_comprada).setScale(2, RoundingMode.HALF_UP);//total_vendido
+        BigDecimal total_comprado = producto_selecionado.getCosto().multiply(cantidad_comprada).setScale(2, RoundingMode.HALF_UP);//total_costo
+        BigDecimal total_ganado = total_vendido.subtract(total_comprado).setScale(2, RoundingMode.HALF_UP);//total_ganancia
+
+        DetalleTicket nuevo_det = new DetalleTicket();
+        nuevo_det.setTicket(this.getTicketActivo());
+        nuevo_det.setProducto(producto_selecionado);
+        nuevo_det.setPrecio(producto_selecionado.getPrecio());
+        nuevo_det.setCantidad(cantidad_comprada);
+        nuevo_det.setTotal(total_vendido);
+        nuevo_det.setGanancia(total_ganado);
+        return nuevo_det;
+    }
+
+    private Ticket getTicketActivo() {
+        Ticket ticketActivo = this.ticketController.getTicketActivo();
+        if (this.isNull(ticketActivo)) {//si es null se crea nuevo ticket
+            ticketActivo = new Ticket();
+            ticketActivo.setIdticket(0);
+            ticketActivo.setTotal(BigDecimal.ZERO);
+            ticketActivo.setGanancia(BigDecimal.ZERO);
+            ticketActivo.setPago(BigDecimal.ZERO);
+            ticketActivo.setCambio(BigDecimal.ZERO);
+            ticketActivo.setFechaRegistrado(new Date());
+            ticketActivo.setPagado(false);
+            ticketActivo.setEstado(true);
+            this.ticketController.guardarTicket(ticketActivo);
+            ticketActivo = this.ticketController.getTicketActivo();
+        }
+        return ticketActivo;
+    }
+
+    public void cargarTicketPendiente() {
+        Ticket ticketActivo = this.ticketController.getTicketActivo();
+        if (this.isNull(ticketActivo)) {//si es null se crea nuevo ticket
+            ticketActivo = new Ticket();
+            ticketActivo.setIdticket(0);
+            ticketActivo.setTotal(BigDecimal.ZERO);
+            ticketActivo.setGanancia(BigDecimal.ZERO);
+            ticketActivo.setPago(BigDecimal.ZERO);
+            ticketActivo.setCambio(BigDecimal.ZERO);
+            ticketActivo.setFechaRegistrado(new Date());
+            ticketActivo.setPagado(false);
+            ticketActivo.setEstado(true);
+            this.ticketController.guardarTicket(ticketActivo);
+            ticketActivo = this.ticketController.getTicketActivo();
+        }
+        List<DetalleTicket> lista_detalles = this.ticketController.getDetfFromTckt(ticketActivo.getIdticket());
+        this.tableModelDetTicket1.change(lista_detalles);
+        this.refrescarTotales();
+    }
+
+    private boolean isNull(Object object) {
+        return object == null;
+    }
+
+    private void refrescarTotales() {
+        List<DetalleTicket> detalles = this.tableModelDetTicket1.serialize();
+        BigDecimal total = BigDecimal.ZERO;
+        for (DetalleTicket detalle : detalles) {
+            total = total.add(detalle.getTotal()).setScale(2, RoundingMode.HALF_UP);;
+        }
+        this.jtxtTotalVenta.setText(total.toString());
+        this.jtxtCantidadVenta.setText(String.valueOf(detalles.size()));
+    }
 }

@@ -269,6 +269,8 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         setVisible(false);
         dispose();
+        this.setProducto_selecionado(null);
+        this.setCantidad_comprada(null);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
@@ -283,12 +285,16 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
             }
             if (cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {
                 JOptionPane.showMessageDialog(this, "La cantidad para el producto " + producto_sel.getDescripcion() + " debe ser un numero valido y mayor a cero", "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
+                this.setProducto_selecionado(null);
+                this.setCantidad_comprada(null);
             } else {
                 this.setProducto_selecionado(producto_sel);
                 this.setCantidad_comprada(cantidad_prod);
                 this.dispose();
             }
         } else {
+            this.setProducto_selecionado(null);
+            this.setCantidad_comprada(null);
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas Agregar a la venta actual", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
@@ -323,6 +329,8 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
         this.cargarProductosActivos();
         this.jtbCatlProductos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 13));
         this.jtxtNombre.setFocusable(true);
+        this.setProducto_selecionado(null);
+        this.setCantidad_comprada(null);
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 

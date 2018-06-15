@@ -71,10 +71,12 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         getActionMap(btnNuevoProducto, "nuevo", KeyEvent.VK_N);
         getActionMap(btnEditarProducto, "editar", KeyEvent.VK_M);
         getActionMap(btnEliminarProducto, "eliminar", KeyEvent.VK_E);
+        getActionMap(btnEliminarProducto, "cerrar", KeyEvent.VK_ESCAPE);
 
         btnNuevoProducto.setMnemonic(KeyEvent.VK_N);
         btnEditarProducto.setMnemonic(KeyEvent.VK_M);
         btnEliminarProducto.setMnemonic(KeyEvent.VK_E);
+        btnCerrar.setMnemonic(KeyEvent.VK_ESCAPE);
     }
 
     public void getActionMap(JComponent componente, String nombreAccion, int tecla) {
@@ -112,6 +114,15 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                     }
                 }
             };
+        } else if (nombreAccion.equals("cerrar")) {
+            return new AbstractAction(nombreAccion) {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    if (btnCerrar.isEnabled()) {
+                        btnCerrarActionPerformed(evt);
+                    }
+                }
+            };
         }
         return null;
     }
@@ -138,6 +149,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jchckVerEliminados = new javax.swing.JCheckBox();
         jtxtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jtxtTotalRegistros = new javax.swing.JTextField();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -282,6 +295,15 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Total registros:");
+
+        jtxtTotalRegistros.setEditable(false);
+        jtxtTotalRegistros.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jtxtTotalRegistros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtTotalRegistros.setText("0");
+
         javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
         jpnlFondoGris.setLayout(jpnlFondoGrisLayout);
         jpnlFondoGrisLayout.setHorizontalGroup(
@@ -290,7 +312,12 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jchckVerEliminados)
+                        .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtxtTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(123, 123, 123)
+                            .addComponent(jchckVerEliminados))
                         .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -317,8 +344,12 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jchckVerEliminados)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jchckVerEliminados)
+                    .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtxtTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
@@ -403,6 +434,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
         TableColumn columna_0 = this.jtbCatlProductos.getColumnModel().getColumn(0);//col id
         columna_0.setMaxWidth(30);
+
+        this.jtxtTotalRegistros.setText(String.valueOf(this.jtbCatlProductos.getRowCount()));
     }
 
     private void cargarProductosActivos() {
@@ -418,14 +451,14 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
         TableColumn columna_8 = this.jtbCatlProductos.getColumnModel().getColumn(8);
         this.jtbCatlProductos.getColumnModel().removeColumn(columna_8);
+
+        this.jtxtTotalRegistros.setText(String.valueOf(this.jtbCatlProductos.getRowCount()));
     }
 
     @Override
     public void setVisible(boolean b) {
         this.cargarProductosActivos();
-
         this.jtbCatlProductos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 13));
-
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -437,6 +470,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jchckVerEliminados;
@@ -444,6 +478,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jpnlFondoVerde;
     private javax.swing.JTable jtbCatlProductos;
     private javax.swing.JTextField jtxtNombre;
+    private javax.swing.JTextField jtxtTotalRegistros;
     private pos.stalupita.tablemodels.TableModelCatProductos tableModelCatProductos1;
     // End of variables declaration//GEN-END:variables
 

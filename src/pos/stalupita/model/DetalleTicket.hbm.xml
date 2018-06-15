@@ -23,5 +23,8 @@
         <property name="total" type="big_decimal">
             <column name="total" precision="10" />
         </property>
+        <property name="ganancia" type="big_decimal">
+            <column name="ganancia" precision="10" />
+        </property>
     </class>
 </hibernate-mapping>

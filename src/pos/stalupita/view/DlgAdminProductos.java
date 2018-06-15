@@ -17,7 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.RowFilter;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
@@ -127,11 +130,14 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnEditarProducto = new javax.swing.JButton();
         btnNuevoProducto = new javax.swing.JButton();
         btnEliminarProducto = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbCatlProductos = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jchckVerEliminados = new javax.swing.JCheckBox();
+        jtxtNombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -149,7 +155,6 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnEditarProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnEditarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/09_pencil-48.png"))); // NOI18N
         btnEditarProducto.setText("<html><center><b>Modificar</b> &nbsp<font color = blue>(Alt + M)</font> </center></html>");
-        btnEditarProducto.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnEditarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditarProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +167,6 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnNuevoProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnNuevoProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_plus-48.png"))); // NOI18N
         btnNuevoProducto.setText("<html><center><b>Registrar</b> &nbsp<font color = blue>(Alt + N)</font> </center></html>");
-        btnNuevoProducto.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnNuevoProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevoProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -175,12 +179,23 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         btnEliminarProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_trash-2-48.png"))); // NOI18N
         btnEliminarProducto.setText("<html><center><b>Eliminar</b> &nbsp<font color = blue>(Alt + E)</font> </center></html>");
-        btnEliminarProducto.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnEliminarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminarProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarProductoActionPerformed(evt);
+            }
+        });
+
+        btnCerrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCerrar.setForeground(new java.awt.Color(51, 102, 255));
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_minus-48.png"))); // NOI18N
+        btnCerrar.setText("<html><center><b>Cerrar</b> &nbsp<font color = blue>(ESC)</font> </center></html>");
+        btnCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
             }
         });
 
@@ -193,7 +208,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEditarProducto)
                     .addComponent(btnNuevoProducto)
-                    .addComponent(btnEliminarProducto))
+                    .addComponent(btnEliminarProducto)
+                    .addComponent(btnCerrar))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,12 +221,15 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addComponent(btnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBackground(new java.awt.Color(4, 151, 135));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(4, 151, 135), 5, true));
 
+        jtbCatlProductos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jtbCatlProductos.setModel(tableModelCatProductos1);
         jScrollPane1.setViewportView(jtbCatlProductos);
 
@@ -226,16 +245,16 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jpnlFondoVerdeLayout.setHorizontalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
-                .addGap(242, 242, 242)
+                .addGap(394, 394, 394)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(401, Short.MAX_VALUE))
         );
         jpnlFondoVerdeLayout.setVerticalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jchckVerEliminados.setBackground(new java.awt.Color(119, 136, 152));
@@ -247,34 +266,59 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             }
         });
 
+        jtxtNombre.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jtxtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtNombreFocusGained(evt);
+            }
+        });
+        jtxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtNombreKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Nombre:");
+
         javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
         jpnlFondoGris.setLayout(jpnlFondoGrisLayout);
         jpnlFondoGrisLayout.setHorizontalGroup(
             jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jchckVerEliminados)
-                    .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
-                            .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(50, 50, 50))
+                .addContainerGap()
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jchckVerEliminados)
+                        .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
         jpnlFondoGrisLayout.setVerticalGroup(
             jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(27, 27, 27)
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jchckVerEliminados)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
@@ -310,7 +354,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
         if (this.validacionXSeleccion()) {
-            this.eliminarProducto();            
+            this.eliminarProducto();
             this.cargarProductosActivos();
         } else {
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas Eliminar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
@@ -324,6 +368,30 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             this.cargarProductosActivos();
         }
     }//GEN-LAST:event_jchckVerEliminadosStateChanged
+
+    private void jtxtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusGained
+        this.jtxtNombre.selectAll();
+    }//GEN-LAST:event_jtxtNombreFocusGained
+
+    private void jtxtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtNombreKeyReleased
+        if (!this.jtxtNombre.getText().isEmpty()) {
+            try {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((TableModelCatProductos) this.jtbCatlProductos.getModel()));
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + this.jtxtNombre.getText()));
+
+                this.jtbCatlProductos.setRowSorter(sorter);
+            } catch (java.util.regex.PatternSyntaxException e) {
+                return;
+            }
+        } else {
+            this.jtbCatlProductos.setRowSorter(null);
+        }
+    }//GEN-LAST:event_jtxtNombreKeyReleased
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        this.dispose();
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void cargarTodosProductos() {
         this.tableModelCatProductos1 = new TableModelCatProductos();
@@ -363,16 +431,19 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditarProducto;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jchckVerEliminados;
     private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
     private javax.swing.JTable jtbCatlProductos;
+    private javax.swing.JTextField jtxtNombre;
     private pos.stalupita.tablemodels.TableModelCatProductos tableModelCatProductos1;
     // End of variables declaration//GEN-END:variables
 

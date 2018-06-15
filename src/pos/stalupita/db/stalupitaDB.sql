@@ -46,6 +46,7 @@ INSERT INTO stalupita.categoria VALUES(0,'Crecimiento Pavo',1);
 INSERT INTO stalupita.categoria VALUES(0,'Engorda Pavo',1);
 
 INSERT INTO stalupita.categoria VALUES(0,'Salvadillo Ganado',1);
+INSERT INTO stalupita.categoria VALUES(0,'Medicamentos',1);
 INSERT INTO stalupita.categoria VALUES(0,'Fertilizantes',1);
 INSERT INTO stalupita.categoria VALUES(0,'Herbicidas',1);
 INSERT INTO stalupita.categoria VALUES(0,'Granos(Maiz)',1);

@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
@@ -277,14 +278,26 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
         if (this.validacionXSeleccion()) {
             Integer index_selected = this.jtbCatlProductos.getSelectedRow();
             Producto producto_sel = this.getProductoXIndex(index_selected);
-            String cantidad_txt = JOptionPane.showInputDialog(this, "Ingresa la cantidad de " + producto_sel.getDescripcion() + " en " + producto_sel.getUnidadMedida().getDescripcion(), "Mensaje del sistema", JOptionPane.INFORMATION_MESSAGE);
+            String msg_html = "<html><center>"
+                    + " Ingresa la cantidad para "
+                    + "<b>" + producto_sel.getDescripcion() + "</b> "
+                    + "en " + producto_sel.getUnidadMedida().getDescripcion()
+                    + "</center></html>";
+            JLabel jLabel = new JLabel(msg_html);
+            String cantidad_txt = JOptionPane.showInputDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
             BigDecimal cantidad_prod = BigDecimal.ZERO;
             try {
                 cantidad_prod = new BigDecimal(cantidad_txt);
             } catch (Exception e) {
             }
             if (cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {
-                JOptionPane.showMessageDialog(this, "La cantidad para el producto " + producto_sel.getDescripcion() + " debe ser un numero valido y mayor a cero", "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
+                msg_html = "<html><center>"
+                        + " La cantidad para el producto "
+                        + "<b>" + producto_sel.getDescripcion() + "</b> "
+                        + " debe ser un numero valido y mayor a cero "
+                        + "</center></html>";
+                jLabel = new JLabel(msg_html);
+                JOptionPane.showMessageDialog(this, jLabel, "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
                 this.setProducto_selecionado(null);
                 this.setCantidad_comprada(null);
             } else {

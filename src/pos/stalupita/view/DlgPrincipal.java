@@ -537,10 +537,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas Editar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCambiarCantidadActionPerformed
-    private void editarCantidadProducto() {        Integer index_selected = this.jtblDetalleTicket.getSelectedRow();
+    private void editarCantidadProducto() {
+        Integer index_selected = this.jtblDetalleTicket.getSelectedRow();
         DetalleTicket detalleTicket = this.getDetailXIndex(index_selected);
         String msg_html = "<html><center>"
-                + " Ingresa la nueva cantidad para "
+                + " Ingresa la cantidad para "
                 + "<b>" + detalleTicket.getProducto().getDescripcion() + "</b> "
                 + "en " + detalleTicket.getProducto().getUnidadMedida().getDescripcion()
                 + "</center></html>";
@@ -551,9 +552,14 @@ public class DlgPrincipal extends javax.swing.JDialog {
             cantidad_prod = new BigDecimal(cantidad_txt);
         } catch (Exception e) {
         }
-        if (cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {//se ingreso una cantidad erronea
-            JOptionPane.showMessageDialog(this, "La cantidad para el producto " + detalleTicket.getProducto().getDescripcion()
-                    + " debe ser un numero valido y mayor a cero", "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
+        if (cantidad_txt != null && cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {//se ingreso una cantidad erronea
+            msg_html = "<html><center>"
+                    + " La cantidad para el producto "
+                    + "<b>" + detalleTicket.getProducto().getDescripcion() + "</b> "
+                    + " debe ser un numero valido y mayor a cero "
+                    + "</center></html>";
+            jLabel = new JLabel(msg_html);
+            JOptionPane.showMessageDialog(this, jLabel, "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
         } else {
             this.agruparProducto(detalleTicket, cantidad_prod);
         }

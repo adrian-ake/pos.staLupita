@@ -45,7 +45,8 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private DlgBusquedaProducto dlgBusquedaProducto;
     @Resource
     private DlgPago dlgPago;
-
+    @Resource
+    private DlgVentas dlgVentas;
     @Resource
     private TicketController ticketController;
 
@@ -513,7 +514,9 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_jmitemRegistrarActionPerformed
 
     private void jmitemventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemventasActionPerformed
-        // TODO add your handling code here:
+        this.dlgVentas.setModal(true);
+        this.dlgVentas.setLocationRelativeTo(this);
+        this.dlgVentas.setVisible(true);
     }//GEN-LAST:event_jmitemventasActionPerformed
 
     private void jmitemAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemAdministrarActionPerformed
@@ -615,7 +618,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
             this.cancelarTicket();
             JOptionPane.showMessageDialog(this, "El ticket actual ha sido cancelado", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
             this.cargarTicketPendiente();
-            this.refrescarTotales();            
+            this.refrescarTotales();
         }
 
     }//GEN-LAST:event_btnCancelarVentaActionPerformed

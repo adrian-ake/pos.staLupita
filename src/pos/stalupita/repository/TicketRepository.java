@@ -68,7 +68,8 @@ public class TicketRepository implements TicketDAOI {
     public Ticket getTicketActivo() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = sdf.format(new Date());
-        String query = "SELECT * FROM stalupita.ticket WHERE fecha_registrado like '" + fecha + "%' AND pagado=0 AND estado=1 limit 1";
+//        String query = "SELECT * FROM stalupita.ticket WHERE fecha_registrado like '" + fecha + "%' AND pagado=0 AND estado=1 limit 1";
+        String query = "SELECT * FROM stalupita.ticket WHERE pagado=0 AND estado=1 limit 1";
         SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Ticket.class);
         return (Ticket) sqlQuery.uniqueResult();
     }

@@ -25,20 +25,24 @@ public class TicketController {
     public Ticket getTicketActivo() {
         return this.ticketService.getTicketActivo();
     }
-    
-    public void guardarTicket(Ticket ticket){
+
+    public void guardarTicket(Ticket ticket) {
         this.ticketService.guardarTicket(ticket);
     }
 
     public void guardarDetalleTicket(DetalleTicket nuevo_det) {
         this.ticketService.guardarDetalleTck(nuevo_det);
     }
-    
-    public List<DetalleTicket> getDetfFromTckt(Integer idTicket){
+
+    public List<DetalleTicket> getDetfFromTckt(Integer idTicket) {
         return this.ticketService.getDetfFromTckt(idTicket);
     }
 
     public void actualizarDet(DetalleTicket agregadoDetalle) {
         this.ticketService.saveOrUpdateDetTicket(agregadoDetalle);
+    }
+
+    public void eliminarDetalle(DetalleTicket detalleTicket) {
+        this.ticketService.eliminarDetalle(detalleTicket);
     }
 }

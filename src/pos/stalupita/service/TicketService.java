@@ -48,4 +48,8 @@ public class TicketService {
     public List<DetalleTicket> getDetfFromTckt(Integer idTicket) {
         return this.ticketDAOI.getDetfFromTckt(idTicket);
     }
+
+    public void eliminarDetalle(DetalleTicket detalleTicket) {
+        this.genericDAOI.remove(detalleTicket);
+    }
 }

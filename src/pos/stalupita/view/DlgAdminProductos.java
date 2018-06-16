@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
@@ -349,7 +350,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                     .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtxtTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
@@ -510,9 +511,13 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private void eliminarProducto() {
         Integer index_selected = this.jtbCatlProductos.getSelectedRow();
         Producto producto_del = this.getProductoXIndex(index_selected);
-        String mensaje = "¿Está seguro que desea Eliminar el producto"
-                + " " + producto_del.getDescripcion() + " ?";
-        if (JOptionPane.showConfirmDialog(null, mensaje, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+        String msg_html = "<html><center>"
+                + " ¿Está seguro que desea Eliminar el producto"
+                + "<b>" + producto_del.getDescripcion() + "</b>? "
+                + "</center></html>";
+        JLabel jLabel = new JLabel(msg_html);       
+        
+        if (JOptionPane.showConfirmDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
             producto_del.setDeletedAt(new Date());
             producto_del.setEstado(false);
             this.productoController.guardarUpdProducto(producto_del);

@@ -577,12 +577,29 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
     private void btnEliminarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProdutoActionPerformed
         if (this.validacionXSeleccion()) {
+            this.eliminarDetalle();
             this.refrescarTotales();
+            this.cargarTicketPendiente();
         } else {
             JOptionPane.showMessageDialog(this, "Elige el producto que deseas Eliminar", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
         }
         this.refrescarTotales();
     }//GEN-LAST:event_btnEliminarProdutoActionPerformed
+
+    private void eliminarDetalle() {
+        Integer index_selected = this.jtblDetalleTicket.getSelectedRow();
+        DetalleTicket detalleTicket = this.getDetailXIndex(index_selected);
+        String msg_html = "<html><center>"
+                + " ¿Está seguro que desea Eliminar el producto"
+                + "<b>" + detalleTicket.getProducto().getDescripcion() + "</b>? "
+                + "</center></html>";
+        JLabel jLabel = new JLabel(msg_html);
+
+        if (JOptionPane.showConfirmDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+            this.ticketController.eliminarDetalle(detalleTicket);
+            JOptionPane.showMessageDialog(this, "El producto ha sido eliminado de la venta", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
         this.refrescarTotales();
@@ -722,6 +739,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
             ticketActivo = this.ticketController.getTicketActivo();
         }
         List<DetalleTicket> lista_detalles = this.ticketController.getDetfFromTckt(ticketActivo.getIdticket());
+        this.tableModelDetTicket1.change(new ArrayList<DetalleTicket>());
         this.tableModelDetTicket1.change(lista_detalles);
         this.refrescarTotales();
     }

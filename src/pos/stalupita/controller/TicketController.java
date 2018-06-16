@@ -45,4 +45,8 @@ public class TicketController {
     public void eliminarDetalle(DetalleTicket detalleTicket) {
         this.ticketService.eliminarDetalle(detalleTicket);
     }
+
+    public void actualizarTckt(Ticket ticket) {
+        this.ticketService.actualizarTckt(ticket);
+    }
 }

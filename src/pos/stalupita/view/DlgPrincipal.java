@@ -35,12 +35,16 @@ import pos.stalupita.model.Ticket;
 @Component(value = "singleton")
 public class DlgPrincipal extends javax.swing.JDialog {
 
+    private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(DlgPrincipal.class.getName());
+
     @Resource
     private DlgRegistrar_prod jdlgRegistrar_prod;
     @Resource
     private DlgAdminProductos dlgAdminProductos;
     @Resource
     private DlgBusquedaProducto dlgBusquedaProducto;
+    @Resource
+    private DlgPago dlgPago;
 
     @Resource
     private TicketController ticketController;
@@ -602,12 +606,65 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }
 
     private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
-        this.refrescarTotales();
+        String msg_html = "<html><center>"
+                + "<b>¿Está seguro que desea cancelar la venta actual?</b> "
+                + "</center></html>";
+        JLabel jLabel = new JLabel(msg_html);
+
+        if (JOptionPane.showConfirmDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+            this.cancelarTicket();
+            JOptionPane.showMessageDialog(this, "El ticket actual ha sido cancelado", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
+            this.cargarTicketPendiente();
+            this.refrescarTotales();            
+        }
+
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
 
     private void btnPagarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarVentaActionPerformed
-        this.refrescarTotales();
+        if (!this.tableModelDetTicket1.isEmpty()) {
+            dlgPago.setModal(true);
+            dlgPago.setLocationRelativeTo(this);
+            dlgPago.setDatos(this.getTicketTotalizado());
+            dlgPago.setVisible(true);
+            this.cargarTicketPendiente();
+            this.refrescarTotales();
+        } else {
+            JOptionPane.showMessageDialog(this, "No puedes pagar una venta sin productos", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnPagarVentaActionPerformed
+
+    private void cancelarTicket() {
+        try {
+            Ticket ticket_cancelar = this.getTicketCancel();
+            this.ticketController.actualizarTckt(ticket_cancelar);
+        } catch (Exception e) {
+            log.error("error al tratar de cancelar el ticket de venta", e);
+        }
+    }
+
+    private Ticket getTicketCancel() {
+        Ticket ticket_totalizado = this.getTicketActivo();
+        ticket_totalizado.setPagado(false);
+        ticket_totalizado.setEstado(false);
+        ticket_totalizado.setFechaCancelado(new Date());
+        return ticket_totalizado;
+    }
+
+    private Ticket getTicketTotalizado() {
+        Ticket ticket_totalizado = this.getTicketActivo();
+        ticket_totalizado.setTotal(new BigDecimal(this.jtxtTotalVenta.getText()));
+        ticket_totalizado.setGanancia(this.getGanancia());
+        return ticket_totalizado;
+    }
+
+    private BigDecimal getGanancia() {
+        BigDecimal ganancia = BigDecimal.ZERO;
+        List<DetalleTicket> detalles_venta = this.tableModelDetTicket1.serialize();
+        for (DetalleTicket detalles_venta1 : detalles_venta) {
+            ganancia = ganancia.add(detalles_venta1.getGanancia()).setScale(2, RoundingMode.HALF_UP);
+        }
+        return ganancia;
+    }
 
     @Override
     public void setVisible(boolean b) {

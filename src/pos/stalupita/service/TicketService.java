@@ -19,37 +19,41 @@ import pos.stalupita.repository.TicketDAOI;
  */
 @Service
 public class TicketService {
-
+    
     @Resource
     private TicketDAOI ticketDAOI;
     @Resource
     private GenericDAOI genericDAOI;
-
+    
     public void guardarTicket(Ticket ticket) {
         this.genericDAOI.save(ticket);
     }
-
+    
     public void saveOrUpdateTicket(Ticket ticket) {
         this.genericDAOI.saveOrUpdate(ticket);
     }
-
+    
     public void guardarDetalleTck(DetalleTicket detalleTicket) {
         this.genericDAOI.save(detalleTicket);
     }
-
+    
     public void saveOrUpdateDetTicket(DetalleTicket detalleTicket) {
         this.genericDAOI.saveOrUpdate(detalleTicket);
     }
-
+    
     public Ticket getTicketActivo() {
         return this.ticketDAOI.getTicketActivo();
     }
-
+    
     public List<DetalleTicket> getDetfFromTckt(Integer idTicket) {
         return this.ticketDAOI.getDetfFromTckt(idTicket);
     }
-
+    
     public void eliminarDetalle(DetalleTicket detalleTicket) {
         this.genericDAOI.remove(detalleTicket);
+    }
+    
+    public void actualizarTckt(Ticket ticket) {
+        this.genericDAOI.saveOrUpdate(ticket);
     }
 }

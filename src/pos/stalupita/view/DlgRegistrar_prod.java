@@ -5,7 +5,6 @@
  */
 package pos.stalupita.view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
@@ -17,8 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
@@ -107,22 +104,22 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         jcboxCategoria.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jcboxCategoria.setForeground(new java.awt.Color(33, 37, 41));
         jcboxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jcboxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 301, -1));
+        jPanel1.add(jcboxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 160, 320, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Categoria:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jcboxUme.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jcboxUme.setForeground(new java.awt.Color(33, 37, 41));
         jcboxUme.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jcboxUme, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 301, -1));
+        jPanel1.add(jcboxUme, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 200, 320, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Descripcion:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         jtxtCosto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtCosto.setForeground(new java.awt.Color(33, 37, 41));
@@ -132,7 +129,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 jtxtCostoFocusGained(evt);
             }
         });
-        jPanel1.add(jtxtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 301, -1));
+        jPanel1.add(jtxtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 240, 320, -1));
 
         jtxtPrecioVenta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtPrecioVenta.setForeground(new java.awt.Color(33, 37, 41));
@@ -142,12 +139,12 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 jtxtPrecioVentaFocusGained(evt);
             }
         });
-        jPanel1.add(jtxtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 301, -1));
+        jPanel1.add(jtxtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 280, 320, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Precio(Venta) $ :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         jtxtDescripcion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jtxtDescripcion.setForeground(new java.awt.Color(33, 37, 41));
@@ -157,12 +154,12 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 jtxtDescripcionFocusGained(evt);
             }
         });
-        jPanel1.add(jtxtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 301, -1));
+        jPanel1.add(jtxtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 120, 320, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Costo(Compra) $ :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_x-32.png"))); // NOI18N
@@ -179,7 +176,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Unidad de Medida:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/save-32.png"))); // NOI18N
@@ -191,7 +188,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 150, 67));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 150, 67));
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
         jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -207,7 +204,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
                 .addGap(148, 148, 148)
                 .addComponent(jblTitulo)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         jpnlFondoVerdeLayout.setVerticalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +214,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
                 .addGap(25, 25, 25))
         );
 
-        jPanel1.add(jpnlFondoVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 80));
+        jPanel1.add(jpnlFondoVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 80));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,7 +224,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -257,6 +254,9 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Mensaje del Sistema", JOptionPane.WARNING_MESSAGE);
+            this.jtxtDescripcion.selectAll();
+            this.jtxtDescripcion.setFocusable(true);
+            this.jtxtDescripcion.requestFocus();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -265,7 +265,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     }//GEN-LAST:event_jtxtPrecioVentaFocusGained
 
     private void jtxtDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDescripcionFocusGained
-       this.jtxtDescripcion.selectAll();
+        this.jtxtDescripcion.selectAll();
     }//GEN-LAST:event_jtxtDescripcionFocusGained
 
     private void guardarProducto() {
@@ -310,6 +310,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     public void setVisible(boolean b) {
         this.jtxtDescripcion.selectAll();
         this.jtxtDescripcion.setFocusable(true);
+        this.jtxtDescripcion.requestFocus();
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -317,6 +318,9 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
         this.jtxtDescripcion.setText("Descripcion Producto");
         this.jtxtCosto.setText("0.00");
         this.jtxtPrecioVenta.setText("0.00");
+        this.jtxtDescripcion.selectAll();
+        this.jtxtDescripcion.setFocusable(true);
+        this.jtxtDescripcion.requestFocus();
         cargarCombos();
     }
 

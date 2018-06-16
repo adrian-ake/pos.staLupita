@@ -342,6 +342,7 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
         this.cargarProductosActivos();
         this.jtbCatlProductos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 13));
         this.jtxtNombre.setFocusable(true);
+         this.jtxtNombre.requestFocus();
         this.setProducto_selecionado(null);
         this.setCantidad_comprada(null);
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.

@@ -6,6 +6,7 @@
 package pos.stalupita;
 
 import java.awt.Color;
+import javax.swing.JFrame;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import pos.stalupita.herramientas.SpringContextLoad;
@@ -47,6 +48,7 @@ public class MainStaLupita {
             frmPrincipal = SpringContextLoad.getContext().getBean(FrmMain.class);
             frmPrincipal.setLocationRelativeTo(null);
         }
+         frmPrincipal.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return frmPrincipal;
     }
 

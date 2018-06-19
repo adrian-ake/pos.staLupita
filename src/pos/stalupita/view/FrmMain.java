@@ -7,6 +7,7 @@ package pos.stalupita.view;
 
 import javax.annotation.Resource;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pos.stalupita.herramientas.Utilities;
@@ -27,6 +28,7 @@ public class FrmMain extends javax.swing.JFrame {
     public FrmMain() {
         initComponents();
         Utilities.setFrameIcon(this);
+        cargarTam();
     }
 
     @Autowired
@@ -34,6 +36,11 @@ public class FrmMain extends javax.swing.JFrame {
         initComponents();
         Utilities.setFrameIcon(this);
         this.jdlgPrincipal = jdlgPrincipal;
+        cargarTam();
+    }
+
+    private void cargarTam() {
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public ImageIcon getImageIcon() {
@@ -50,6 +57,7 @@ public class FrmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(149, 163, 190));
         setIconImage(getIconImage());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

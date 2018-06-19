@@ -161,10 +161,11 @@ public class DlgAdminProductos extends javax.swing.JDialog {
 
         jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(245, 246, 250));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(4, 151, 135), 2), "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnEditarProducto.setBackground(new java.awt.Color(255, 255, 255));
         btnEditarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEditarProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnEditarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/09_pencil-48.png"))); // NOI18N
@@ -177,6 +178,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             }
         });
 
+        btnNuevoProducto.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevoProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnNuevoProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnNuevoProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_plus-48.png"))); // NOI18N
@@ -189,6 +191,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             }
         });
 
+        btnEliminarProducto.setBackground(new java.awt.Color(255, 255, 255));
         btnEliminarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEliminarProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/010_trash-2-48.png"))); // NOI18N
@@ -201,6 +204,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             }
         });
 
+        btnCerrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCerrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCerrar.setForeground(new java.awt.Color(51, 102, 255));
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/07_minus-48.png"))); // NOI18N

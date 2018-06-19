@@ -138,7 +138,7 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
             }
         });
 
-        jpnlFondoGris.setBackground(new java.awt.Color(119, 136, 152));
+        jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
 
         jScrollPane1.setBackground(new java.awt.Color(4, 151, 135));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(4, 151, 135), 5, true));
@@ -290,7 +290,7 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
                 cantidad_prod = new BigDecimal(cantidad_txt);
             } catch (Exception e) {
             }
-            if (cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {
+            if (cantidad_txt != null && cantidad_txt.isEmpty() || cantidad_prod.compareTo(BigDecimal.ZERO) < 1) {
                 msg_html = "<html><center>"
                         + " La cantidad para el producto "
                         + "<b>" + producto_sel.getDescripcion() + "</b> "
@@ -342,7 +342,7 @@ public class DlgBusquedaProducto extends javax.swing.JDialog {
         this.cargarProductosActivos();
         this.jtbCatlProductos.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 13));
         this.jtxtNombre.setFocusable(true);
-         this.jtxtNombre.requestFocus();
+        this.jtxtNombre.requestFocus();
         this.setProducto_selecionado(null);
         this.setCantidad_comprada(null);
         super.setVisible(b); //To change body of generated methods, choose Tools | Templates.

@@ -85,7 +85,7 @@ public class DlgPago extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(119, 136, 152));
+        jPanel1.setBackground(new java.awt.Color(149, 163, 190));
 
         btnCancelarVenta.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnCancelarVenta.setForeground(new java.awt.Color(51, 102, 255));

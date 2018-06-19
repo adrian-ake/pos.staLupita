@@ -172,18 +172,17 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnCambiarCantidad = new javax.swing.JButton();
         btnAgregarProducto = new javax.swing.JButton();
         btnEliminarProduto = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnCancelarVenta = new javax.swing.JButton();
-        btnPagarVenta = new javax.swing.JButton();
-        jtxtTotalVenta = new javax.swing.JTextField();
-        jtxtCantidadVenta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblDetalleTicket = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jlblTotalVenta = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnCancelarVenta = new javax.swing.JButton();
+        btnPagarVenta = new javax.swing.JButton();
+        jlblCantidadVenta = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmitemRegistrar = new javax.swing.JMenuItem();
@@ -205,12 +204,13 @@ public class DlgPrincipal extends javax.swing.JDialog {
             }
         });
 
-        jpnlFondoGris.setBackground(new java.awt.Color(119, 136, 152));
+        jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Opciones Venta", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnCambiarCantidad.setBackground(new java.awt.Color(225, 225, 225));
         btnCambiarCantidad.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnCambiarCantidad.setForeground(new java.awt.Color(51, 102, 255));
         btnCambiarCantidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/shopping-edit-48.png"))); // NOI18N
@@ -225,6 +225,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
             }
         });
 
+        btnAgregarProducto.setBackground(new java.awt.Color(225, 225, 225));
         btnAgregarProducto.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnAgregarProducto.setForeground(new java.awt.Color(51, 102, 255));
         btnAgregarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/shopping-add-48.png"))); // NOI18N
@@ -238,6 +239,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
             }
         });
 
+        btnEliminarProduto.setBackground(new java.awt.Color(225, 225, 225));
         btnEliminarProduto.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnEliminarProduto.setForeground(new java.awt.Color(51, 102, 255));
         btnEliminarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/shopping-stop-48.png"))); // NOI18N
@@ -259,103 +261,24 @@ public class DlgPrincipal extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCambiarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
                 .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiarCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Venta Actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 51, 153)));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Total $:");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Cantidad:");
-
-        btnCancelarVenta.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnCancelarVenta.setForeground(new java.awt.Color(51, 102, 255));
-        btnCancelarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/shopping-cancel-48.png"))); // NOI18N
-        btnCancelarVenta.setText("<html><center><b>Cancelar Venta</b><br><font color = blue>(Alt + X)</font> </center></html>");
-        btnCancelarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCancelarVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarVentaActionPerformed(evt);
-            }
-        });
-
-        btnPagarVenta.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnPagarVenta.setForeground(new java.awt.Color(51, 102, 255));
-        btnPagarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/wallet-48.png"))); // NOI18N
-        btnPagarVenta.setText("<html><center><b>Pagar Venta</b> &nbsp<br><font color = blue>(Alt + P)</font> </center></html>");
-        btnPagarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPagarVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPagarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagarVentaActionPerformed(evt);
-            }
-        });
-
-        jtxtTotalVenta.setEditable(false);
-        jtxtTotalVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jtxtTotalVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtTotalVenta.setText("0.00");
-
-        jtxtCantidadVenta.setEditable(false);
-        jtxtCantidadVenta.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jtxtCantidadVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtCantidadVenta.setText("0");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtxtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jtxtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(btnCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnPagarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jtxtTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPagarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(btnCancelarVenta))
-                .addContainerGap())
-        );
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBackground(new java.awt.Color(32, 31, 63));
 
         jtblDetalleTicket.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtblDetalleTicket.setModel(tableModelDetTicket1);
@@ -368,7 +291,14 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Punto de Venta");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/if_Account_1891016.png"))); // NOI18N
+        btnSalir.setBackground(new java.awt.Color(4, 151, 135));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/check-out-32.png"))); // NOI18N
+        btnSalir.setToolTipText("Salir del Programa");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnlFondoVerdeLayout = new javax.swing.GroupLayout(jpnlFondoVerde);
         jpnlFondoVerde.setLayout(jpnlFondoVerdeLayout);
@@ -377,34 +307,85 @@ public class DlgPrincipal extends javax.swing.JDialog {
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
                 .addGap(318, 318, 318)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                .addComponent(btnSalir)
                 .addContainerGap())
         );
         jpnlFondoVerdeLayout.setVerticalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(17, 17, 17)
                 .addGroup(jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Total:  $");
+
+        jlblTotalVenta.setFont(new java.awt.Font("Arial Black", 1, 20)); // NOI18N
+        jlblTotalVenta.setText("0.00");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Cantidad:");
+
+        btnCancelarVenta.setBackground(new java.awt.Color(225, 225, 225));
+        btnCancelarVenta.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btnCancelarVenta.setForeground(new java.awt.Color(51, 102, 255));
+        btnCancelarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/shopping-cancel-48.png"))); // NOI18N
+        btnCancelarVenta.setText("<html><center><b>Cancelar Venta</b><br><font color = blue>(Alt + X)</font> </center></html>");
+        btnCancelarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancelarVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVentaActionPerformed(evt);
+            }
+        });
+
+        btnPagarVenta.setBackground(new java.awt.Color(225, 225, 225));
+        btnPagarVenta.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btnPagarVenta.setForeground(new java.awt.Color(51, 102, 255));
+        btnPagarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/wallet-48.png"))); // NOI18N
+        btnPagarVenta.setText("<html><center><b>Pagar Venta</b> &nbsp<br><font color = blue>(Alt + P)</font> </center></html>");
+        btnPagarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPagarVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPagarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarVentaActionPerformed(evt);
+            }
+        });
+
+        jlblCantidadVenta.setFont(new java.awt.Font("Arial Black", 1, 20)); // NOI18N
+        jlblCantidadVenta.setText("0.00");
 
         javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
         jpnlFondoGris.setLayout(jpnlFondoGrisLayout);
         jpnlFondoGrisLayout.setHorizontalGroup(
             jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                        .addGap(321, 321, 321)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlblTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlblCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(btnCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnPagarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jpnlFondoGrisLayout.setVerticalGroup(
             jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,15 +394,23 @@ public class DlgPrincipal extends javax.swing.JDialog {
                 .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jlblTotalVenta)
+                            .addComponent(jlblCantidadVenta)))
+                    .addComponent(btnPagarVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(btnCancelarVenta))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(41, 107, 189));
+        jMenuBar1.setBackground(new java.awt.Color(33, 32, 64));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jMenu1.setForeground(new java.awt.Color(255, 255, 255));
@@ -489,26 +478,32 @@ public class DlgPrincipal extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpnlFondoGris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jpnlFondoGris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpnlFondoGris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jpnlFondoGris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void salirSistema() {
+        String msg_html = "<html><center>"
+                + "<b>¿Está seguro que desea salir?</b> "
+                + "</center></html>";
+        JLabel jLabel = new JLabel(msg_html);
+        if (JOptionPane.showConfirmDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            this.dispose();
+        }
+    }
+
     /**
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        setVisible(false);
-        dispose();
+        this.salirSistema();
     }//GEN-LAST:event_closeDialog
 
     private void jmitemRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemRegistrarActionPerformed
@@ -642,6 +637,10 @@ public class DlgPrincipal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnPagarVentaActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.salirSistema();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     private void cancelarTicket() {
         try {
             Ticket ticket_cancelar = this.getTicketCancel();
@@ -661,7 +660,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
     private Ticket getTicketTotalizado() {
         Ticket ticket_totalizado = this.getTicketActivo();
-        ticket_totalizado.setTotal(new BigDecimal(this.jtxtTotalVenta.getText()));
+        ticket_totalizado.setTotal(new BigDecimal(this.jlblTotalVenta.getText()));
         ticket_totalizado.setGanancia(this.getGanancia());
         return ticket_totalizado;
     }
@@ -701,16 +700,17 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelarVenta;
     private javax.swing.JButton btnEliminarProduto;
     private javax.swing.JButton btnPagarVenta;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlblCantidadVenta;
+    private javax.swing.JLabel jlblTotalVenta;
     private javax.swing.JMenuItem jmitemAdministrar;
     private javax.swing.JMenuItem jmitemCompras;
     private javax.swing.JMenuItem jmitemGrafCompras;
@@ -722,8 +722,6 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
     private javax.swing.JTable jtblDetalleTicket;
-    private javax.swing.JTextField jtxtCantidadVenta;
-    private javax.swing.JTextField jtxtTotalVenta;
     private pos.stalupita.tablemodels.TableModelDetTicket tableModelDetTicket1;
     // End of variables declaration//GEN-END:variables
 
@@ -832,7 +830,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         for (DetalleTicket detalle : detalles) {
             total = total.add(detalle.getTotal()).setScale(2, RoundingMode.HALF_UP);;
         }
-        this.jtxtTotalVenta.setText(total.toString());
-        this.jtxtCantidadVenta.setText(String.valueOf(detalles.size()));
+        this.jlblTotalVenta.setText(total.toString());
+        this.jlblCantidadVenta.setText(String.valueOf(detalles.size()));
     }
 }

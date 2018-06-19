@@ -159,7 +159,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             }
         });
 
-        jpnlFondoGris.setBackground(new java.awt.Color(119, 136, 152));
+        jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(4, 151, 135), 2), "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
@@ -271,7 +271,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jchckVerEliminados.setBackground(new java.awt.Color(119, 136, 152));
+        jchckVerEliminados.setBackground(new java.awt.Color(149, 163, 190));
         jchckVerEliminados.setForeground(new java.awt.Color(255, 255, 255));
         jchckVerEliminados.setText("Mostrar Eliminados");
         jchckVerEliminados.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -344,13 +344,13 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jchckVerEliminados)
                     .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtxtTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);

@@ -80,7 +80,7 @@ public class DlgVentas extends javax.swing.JDialog {
             }
         });
 
-        jpnlFondoGris.setBackground(new java.awt.Color(119, 136, 152));
+        jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
 
         jScrollPane1.setBackground(new java.awt.Color(4, 151, 135));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(4, 151, 135), 5, true));
@@ -139,7 +139,7 @@ public class DlgVentas extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(119, 136, 152));
+        jPanel1.setBackground(new java.awt.Color(149, 163, 190));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Resumen de Consulta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 

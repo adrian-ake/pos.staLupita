@@ -5,13 +5,11 @@
  */
 package pos.stalupita;
 
-import com.jtattoo.plaf.smart.SmartLookAndFeel;
-import com.jtattoo.plaf.texture.TextureLookAndFeel;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.util.Properties;
+import java.awt.Color;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import pos.stalupita.herramientas.SpringContextLoad;
+import pos.stalupita.view.DlgInicio;
 import pos.stalupita.view.DlgPrincipal;
 import pos.stalupita.view.FrmMain;
 
@@ -23,6 +21,7 @@ public class MainStaLupita {
 
     public static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(MainStaLupita.class.getName());
     private FrmMain frmPrincipal = null;
+    private DlgInicio dlgInicio = new DlgInicio(null, true);
 
     /**
      * @param args the command line arguments
@@ -35,11 +34,11 @@ public class MainStaLupita {
 
     private void lanzarInicio() {
         this.addLaF();
+        new Thread(new HiloPresentacion()).start();
         DlgPrincipal dashPrincipal = SpringContextLoad.getContext().getBean(DlgPrincipal.class);
         new DlgPrincipal(this.getFrmPrincipal(), true);
-        Rectangle maxBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        dashPrincipal.setLocationRelativeTo(this.getFrmPrincipal());
-        dashPrincipal.setBounds(maxBounds);
+        dlgInicio.setVisible(false);
+        dlgInicio.dispose();
         dashPrincipal.setVisible(true);
     }
 
@@ -53,9 +52,28 @@ public class MainStaLupita {
 
     public void addLaF() {
         try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");         
+            UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+
+            UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+            if (defaults.get("Table.alternateRowColor") == null) {
+                defaults.put("Table.alternateRowColor", new Color(240, 240, 240));
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    class HiloPresentacion implements Runnable {
+
+        @Override
+        public void run() {
+            this.lanzarPresentacion();
+        }
+
+        private void lanzarPresentacion() {
+            dlgInicio.setLocationRelativeTo(null);
+            dlgInicio.setAlwaysOnTop(true);
+            dlgInicio.setVisible(true);
         }
     }
 }

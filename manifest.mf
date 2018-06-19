@@ -4,7 +4,7 @@ Created-By: 1.7.0_65-b19 (Oracle Corporation)
 Proyecto: POS_StaLupita
 Version: 1.0.0
 Desarrollador: Adrian Alonso Ake Ek
-FechaCompilacion: 2018-06-18 10:03:01 CDT
+FechaCompilacion: 2018-06-19 12:56:18 CDT
 TituloImplementacion: POS_StaLupita
 VersionImplementacion: 1.0.0${svna.version}
 URLProyecto: https://github.com/adrian-ake/pos.staLupita

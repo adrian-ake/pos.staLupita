@@ -374,7 +374,7 @@ public class DlgRegistrar_prod extends javax.swing.JDialog {
     }
 
     public final void setMnemonic() {
-        getActionMap(btnGuardar, "guardar", KeyEvent.VK_G);
+//        getActionMap(btnGuardar, "guardar", KeyEvent.VK_G);
         getActionMap(btnCancelar, "cerrar", KeyEvent.VK_ESCAPE);
         btnGuardar.setMnemonic(KeyEvent.VK_G);
     }

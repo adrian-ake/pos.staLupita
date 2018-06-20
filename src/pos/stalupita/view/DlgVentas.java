@@ -31,20 +31,14 @@ public class DlgVentas extends javax.swing.JDialog {
     @Resource
     private VentasController ventasController;
 
-    /**
-     * Creates new form DlgVentas
-     */
-    public DlgVentas(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-
     @Autowired
     public DlgVentas(VentasController ventasController) {
         super(null, ModalityType.APPLICATION_MODAL);
         initComponents();
         Utilities.setDialogIcon(this);
+        this.setResizable(false);
         this.ventasController = ventasController;
+        this.getContentPane().setBackground(new java.awt.Color(149, 163, 190));
     }
 
     /**
@@ -56,7 +50,6 @@ public class DlgVentas extends javax.swing.JDialog {
     private void initComponents() {
 
         tableModelTicketsVta1 = new pos.stalupita.tablemodels.TableModelTicketsVta();
-        jpnlFondoGris = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbTickets = new javax.swing.JTable();
         jpnlFondoVerde = new javax.swing.JPanel();
@@ -80,8 +73,6 @@ public class DlgVentas extends javax.swing.JDialog {
             }
         });
 
-        jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
-
         jScrollPane1.setBackground(new java.awt.Color(4, 151, 135));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(4, 151, 135), 5, true));
 
@@ -92,7 +83,7 @@ public class DlgVentas extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jtbTickets);
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
-        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,7 +131,7 @@ public class DlgVentas extends javax.swing.JDialog {
         });
 
         jPanel1.setBackground(new java.awt.Color(149, 163, 190));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Resumen de Consulta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(0), "Resumen de Consulta", 0, 0, null, java.awt.Color.white));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -203,21 +194,20 @@ public class DlgVentas extends javax.swing.JDialog {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
-        jpnlFondoGris.setLayout(jpnlFondoGrisLayout);
-        jpnlFondoGrisLayout.setHorizontalGroup(
-            jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnlFondoGrisLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDcFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,31 +217,29 @@ public class DlgVentas extends javax.swing.JDialog {
                                 .addComponent(jDcFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
                                 .addComponent(jbtnBuscar)))))
-                .addGap(15, 15, 15))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-        jpnlFondoGrisLayout.setVerticalGroup(
-            jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jDcFechaHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDcFechaDesde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                    .addComponent(jDcFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(17, Short.MAX_VALUE))
         );
-
-        getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -350,7 +338,6 @@ public class DlgVentas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnBuscar;
-    private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
     private javax.swing.JTable jtbTickets;
     private javax.swing.JTextField jtxtTotalGanancia;

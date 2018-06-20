@@ -42,17 +42,6 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     @Resource
     private DlgRegistrar_prod jdlgRegistrar_prod;
 
-    /**
-     * Creates new form DlgAdminProductos
-     */
-    public DlgAdminProductos(java.awt.Frame parent, boolean modal) {
-        super(null, ModalityType.APPLICATION_MODAL);
-        initComponents();
-        Utilities.setDialogIcon(this);
-        this.setMnemonic();
-        this.cargarComponents();
-    }
-
     @Autowired
     public DlgAdminProductos() {
         super(null, ModalityType.APPLICATION_MODAL);
@@ -60,6 +49,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         Utilities.setDialogIcon(this);
         this.setMnemonic();
         this.cargarComponents();
+        this.setResizable(false);
+        this.getContentPane().setBackground(new java.awt.Color(149, 163, 190));
     }
 
     private void cargarComponents() {
@@ -137,7 +128,6 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private void initComponents() {
 
         tableModelCatProductos1 = new pos.stalupita.tablemodels.TableModelCatProductos();
-        jpnlFondoGris = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnEditarProducto = new javax.swing.JButton();
         btnNuevoProducto = new javax.swing.JButton();
@@ -159,10 +149,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
             }
         });
 
-        jpnlFondoGris.setBackground(new java.awt.Color(149, 163, 190));
-
         jPanel1.setBackground(new java.awt.Color(245, 246, 250));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(4, 151, 135), 2), "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(4, 151, 135), 2), "Opciones", 2, 0, new java.awt.Font("Arial", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         btnEditarProducto.setBackground(new java.awt.Color(255, 255, 255));
@@ -252,7 +240,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jtbCatlProductos);
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
-        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -309,55 +297,53 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jtxtTotalRegistros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtTotalRegistros.setText("0");
 
-        javax.swing.GroupLayout jpnlFondoGrisLayout = new javax.swing.GroupLayout(jpnlFondoGris);
-        jpnlFondoGris.setLayout(jpnlFondoGrisLayout);
-        jpnlFondoGrisLayout.setHorizontalGroup(
-            jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jtxtTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(123, 123, 123)
                             .addComponent(jchckVerEliminados))
-                        .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-        jpnlFondoGrisLayout.setVerticalGroup(
-            jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlFondoGrisLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jchckVerEliminados)
-                    .addGroup(jpnlFondoGrisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtxtTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
-
-        getContentPane().add(jpnlFondoGris, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -479,7 +465,6 @@ public class DlgAdminProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jchckVerEliminados;
-    private javax.swing.JPanel jpnlFondoGris;
     private javax.swing.JPanel jpnlFondoVerde;
     private javax.swing.JTable jtbCatlProductos;
     private javax.swing.JTextField jtxtNombre;
@@ -519,8 +504,8 @@ public class DlgAdminProductos extends javax.swing.JDialog {
                 + " ¿Está seguro que desea Eliminar el producto"
                 + "<b>" + producto_del.getDescripcion() + "</b>? "
                 + "</center></html>";
-        JLabel jLabel = new JLabel(msg_html);       
-        
+        JLabel jLabel = new JLabel(msg_html);
+
         if (JOptionPane.showConfirmDialog(null, jLabel, "Mensaje del Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
             producto_del.setDeletedAt(new Date());
             producto_del.setEstado(false);

@@ -30,8 +30,7 @@ public class Utilities {
             return;
         }
         dialog.setTitle(getTituloVtanas());
-        dialog.setIconImage(new ImageIcon(dialog.getClass().getResource(ICONO_VENTANAS)).getImage());
-        dialog.setResizable(false);
+        dialog.setIconImage(new ImageIcon(dialog.getClass().getResource(ICONO_VENTANAS)).getImage());        
     }
 
     public static ImageIcon getImageIcon() {

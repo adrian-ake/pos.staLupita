@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
 import pos.stalupita.herramientas.AdapterNumericoFormatMak;
@@ -30,7 +31,8 @@ import pos.stalupita.model.UnidadMedida;
  *
  * @author adrian.ake
  */
-@Component(value = "prototype")
+@Scope(value = "prototype")
+@Component
 public class DlgRegistrar_prod extends javax.swing.JDialog {
 
     @Resource

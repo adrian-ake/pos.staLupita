@@ -23,6 +23,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
 import pos.stalupita.herramientas.RoundedBorderBtn;
@@ -34,6 +35,7 @@ import pos.stalupita.tablemodels.TableModelCatProductos;
  *
  * @author adrian.ake
  */
+@Scope(value = "prototype")
 @Component
 public class DlgAdminProductos extends javax.swing.JDialog {
 
@@ -235,7 +237,7 @@ public class DlgAdminProductos extends javax.swing.JDialog {
         jScrollPane1.setBackground(new java.awt.Color(4, 151, 135));
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(4, 151, 135), 5, true));
 
-        jtbCatlProductos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jtbCatlProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtbCatlProductos.setModel(tableModelCatProductos1);
         jScrollPane1.setViewportView(jtbCatlProductos);
 

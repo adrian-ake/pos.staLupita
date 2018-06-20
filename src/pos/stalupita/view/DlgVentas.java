@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.VentasController;
 import pos.stalupita.herramientas.Utilities;
@@ -23,6 +24,7 @@ import pos.stalupita.model.Ticket;
  *
  * @author adrian.ake
  */
+@Scope(value = "prototype")
 @Component
 public class DlgVentas extends javax.swing.JDialog {
 

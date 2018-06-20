@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.TicketController;
 import pos.stalupita.herramientas.Utilities;
@@ -35,7 +36,8 @@ import pos.stalupita.model.Ticket;
  *
  * @author adrian.ake
  */
-@Component(value = "singleton")
+@Scope(value = "singleton")
+@Component
 public class DlgPrincipal extends javax.swing.JDialog {
 
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(DlgPrincipal.class.getName());
@@ -51,6 +53,9 @@ public class DlgPrincipal extends javax.swing.JDialog {
     @Resource
     private DlgVentas dlgVentas;
     @Resource
+    private DlgGraficaVentas dlgGraficaVentas;
+
+    @Resource
     private TicketController ticketController;
 
     @Autowired
@@ -62,7 +67,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         Utilities.setDialogIcon(this);
         this.cargarConfigsVtana();
         this.setMnemonic();
-        this.ticketController = ticketController;        
+        this.ticketController = ticketController;
         this.getContentPane().setBackground(new java.awt.Color(149, 163, 190));
     }
 
@@ -447,6 +452,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
 
         jmitemGrafVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Diagram-24.png"))); // NOI18N
         jmitemGrafVentas.setText("Grafica Ventas");
+        jmitemGrafVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitemGrafVentasActionPerformed(evt);
+            }
+        });
         jMenu2.add(jmitemGrafVentas);
 
         jMenuBar1.add(jMenu2);
@@ -640,6 +650,12 @@ public class DlgPrincipal extends javax.swing.JDialog {
         }
         this.refrescarTotales();
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
+
+    private void jmitemGrafVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemGrafVentasActionPerformed
+        this.dlgGraficaVentas.setModal(true);
+        this.dlgGraficaVentas.setLocationRelativeTo(null);
+        this.dlgGraficaVentas.setVisible(true);
+    }//GEN-LAST:event_jmitemGrafVentasActionPerformed
 
     private void cancelarTicket() {
         try {

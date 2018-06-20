@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.TicketController;
 import pos.stalupita.herramientas.AdapterNumericoFormatMak;
@@ -26,6 +27,7 @@ import pos.stalupita.model.Ticket;
  *
  * @author adrian.ake
  */
+@Scope(value = "prototype")
 @Component
 public class DlgPago extends javax.swing.JDialog {
 

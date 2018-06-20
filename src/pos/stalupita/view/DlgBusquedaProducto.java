@@ -23,6 +23,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.ProductoController;
 import pos.stalupita.herramientas.PlaceHolder;
@@ -35,6 +36,7 @@ import pos.stalupita.tablemodels.TableModelConsProd;
  *
  * @author adrian.ake
  */
+@Scope(value = "prototype")
 @Component
 public class DlgBusquedaProducto extends javax.swing.JDialog {
 

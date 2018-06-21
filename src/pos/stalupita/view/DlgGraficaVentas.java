@@ -5,12 +5,24 @@
  */
 package pos.stalupita.view;
 
+import java.awt.BorderLayout;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pos.stalupita.controller.VentasController;
 import pos.stalupita.herramientas.Utilities;
+import pos.stalupita.model.Ticket;
 
 /**
  *
@@ -43,11 +55,89 @@ public class DlgGraficaVentas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jmchooMes = new com.toedter.calendar.JMonthChooser();
+        jpnlFondoVerde = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jbtnBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pnlGraficaVta = new javax.swing.JPanel();
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
         });
+
+        jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
+        jpnlFondoVerde.setBorder(new javax.swing.border.SoftBevelBorder(0));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Grafica Ventas Mensuales");
+
+        javax.swing.GroupLayout jpnlFondoVerdeLayout = new javax.swing.GroupLayout(jpnlFondoVerde);
+        jpnlFondoVerde.setLayout(jpnlFondoVerdeLayout);
+        jpnlFondoVerdeLayout.setHorizontalGroup(
+            jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlFondoVerdeLayout.createSequentialGroup()
+                .addContainerGap(351, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(240, 240, 240))
+        );
+        jpnlFondoVerdeLayout.setVerticalGroup(
+            jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Selecciona Mes:");
+
+        jbtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/09_search-24.png"))); // NOI18N
+        jbtnBuscar.setText("Consultar");
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(pnlGraficaVta);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jmchooMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jbtnBuscar)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnlFondoVerde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtnBuscar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jmchooMes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -60,7 +150,102 @@ public class DlgGraficaVentas extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
+        this.generarGraficaBarras();
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void generarGraficaBarras() {
+        XYSeries series = this.getMontosVentas_Series();
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series);
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Ventas del Mes: " + this.getMonth(this.jmchooMes.getMonth() + 1), // Título
+                "Fechas del Mes", // Etiqueta Coordenada X
+                "Monto de Ventas", // Etiqueta Coordenada Y
+                dataset, // Datos
+                PlotOrientation.VERTICAL,
+                true, // Muestra la leyenda de los datos
+                true,
+                false
+        );
+        ChartPanel CP = new ChartPanel(chart);
+        pnlGraficaVta.removeAll();
+        pnlGraficaVta.add(CP, BorderLayout.CENTER);
+        this.pack();
+    }
+
+    private XYSeries getMontosVentas_Series() {
+        XYSeries series = new XYSeries("Ventas Diarias");
+        List<Ticket> tickes_x_fecha = this.ventasController.getMontosVentasXDia(this.jmchooMes.getMonth() + 1);
+        Calendar cal = Calendar.getInstance();
+
+        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for (int i = 1; i <= daysInMonth; i++) {
+            BigDecimal total_vta_dia = BigDecimal.ZERO;
+            for (Ticket ticket : tickes_x_fecha) {
+                cal.setTime(ticket.getFechaRegistrado());
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                if (day == i) {
+                    total_vta_dia = ticket.getTotal();
+                }
+            }
+            series.add(i, total_vta_dia);
+        }
+        return series;
+    }
+
+    private String getMonth(Integer numeroMes) {
+        String mes = "Desconocido";
+        switch (numeroMes) {
+            case 1:
+                mes = "Enero";
+                break;
+            case 2:
+                mes = "Febrero";
+                break;
+            case 3:
+                mes = "Marzo";
+                break;
+            case 4:
+                mes = "Abril";
+                break;
+            case 5:
+                mes = "Mayo";
+                break;
+            case 6:
+                mes = "Junio";
+                break;
+            case 7:
+                mes = "Julio";
+                break;
+            case 8:
+                mes = "Agosto";
+                break;
+            case 9:
+                mes = "Septiembre";
+                break;
+            case 10:
+                mes = "Octubre";
+                break;
+            case 11:
+                mes = "Noviembre";
+                break;
+            case 12:
+                mes = "Diciembre";
+                break;
+        }
+        return mes;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtnBuscar;
+    private com.toedter.calendar.JMonthChooser jmchooMes;
+    private javax.swing.JPanel jpnlFondoVerde;
+    private javax.swing.JPanel pnlGraficaVta;
     // End of variables declaration//GEN-END:variables
 }

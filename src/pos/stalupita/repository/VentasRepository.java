@@ -67,4 +67,16 @@ public class VentasRepository implements VentasDAOI {
         SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Ticket.class);
         return sqlQuery.list();
     }
+
+    @Override
+    public List<Ticket> getMontosVentasXDia(int month) {
+        String mes = String.format("%02d", month);
+        String query = "  select it.idticket as idticket,sum(it.total) as total,sum(it.ganancia) as ganancia,sum(it.pago) as pago, "
+                + "sum(it.cambio) as cambio,it.fecha_registrado as fecha_registrado,it.fecha_cancelado as fecha_cancelado,it.pagado as pagado, "
+                + "it.estado as estado from ( "
+                + "select  t.idticket,t.total,t.ganancia,t.pago,t.cambio,DATE(t.fecha_registrado) as fecha_registrado,t.fecha_cancelado,t.pagado,t.estado  "
+                + " from ticket as t where t.fecha_registrado like '2018-" + mes + "%' AND t.estado=1 AND t.pagado=1) AS it GROUP BY it.fecha_registrado;";
+        SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Ticket.class);
+        return sqlQuery.list();
+    }
 }

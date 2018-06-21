@@ -16,4 +16,6 @@ import pos.stalupita.model.Ticket;
 public interface VentasDAOI {
 
     public List<Ticket> getTicketsByFech(Date f_desde, Date f_hasta);
+
+    public List<Ticket> getMontosVentasXDia(int month);
 }

@@ -26,4 +26,8 @@ public class VentasService {
     public List<Ticket> getTicketsByFech(Date f_desde, Date f_hasta) {
         return this.ticketDAOI.getTicketsByFech(f_desde, f_hasta);
     }
+
+    public List<Ticket> getMontosVentasXDia(int month) {
+        return this.ticketDAOI.getMontosVentasXDia(month);
+    }
 }

@@ -25,4 +25,8 @@ public class VentasController {
     public List<Ticket> getTicketsByFech(Date f_desde, Date f_hasta) {
         return this.ventasService.getTicketsByFech(f_desde, f_hasta);
     }
+
+    public List<Ticket> getMontosVentasXDia(int month) {
+        return this.ventasService.getMontosVentasXDia(month);
+    }
 }

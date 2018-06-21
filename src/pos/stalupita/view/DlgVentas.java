@@ -33,6 +33,9 @@ public class DlgVentas extends javax.swing.JDialog {
     @Resource
     private VentasController ventasController;
 
+    @Resource
+    private DlgDetallesTicket dlgDetallesTicket;
+
     @Autowired
     public DlgVentas(VentasController ventasController) {
         super(null, ModalityType.APPLICATION_MODAL);
@@ -80,8 +83,14 @@ public class DlgVentas extends javax.swing.JDialog {
 
         jtbTickets.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jtbTickets.setModel(tableModelTicketsVta1);
+        jtbTickets.setToolTipText("Doble clic para ver detalles");
         jtbTickets.setGridColor(new java.awt.Color(255, 255, 255));
         jtbTickets.setSelectionBackground(new java.awt.Color(0, 120, 215));
+        jtbTickets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbTicketsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbTickets);
 
         jpnlFondoVerde.setBackground(new java.awt.Color(4, 151, 135));
@@ -257,6 +266,30 @@ public class DlgVentas extends javax.swing.JDialog {
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
         this.consultarDatos();
     }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void jtbTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbTicketsMouseClicked
+        if (evt.getClickCount() == 2) {
+            if (this.validacionXSeleccion()) {
+                Integer index_selected = this.jtbTickets.getSelectedRow();
+                Ticket ticket_selected = this.getTicketXIndex(index_selected);
+                if (ticket_selected != null) {
+                    this.dlgDetallesTicket.setTicket_to_view(ticket_selected);
+                    this.dlgDetallesTicket.setModal(true);
+                    this.dlgDetallesTicket.setLocationRelativeTo(null);
+                    this.dlgDetallesTicket.setVisible(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_jtbTicketsMouseClicked
+
+    public Ticket getTicketXIndex(Integer index) {
+        return this.tableModelTicketsVta1.get(index);
+    }
+
+    private boolean validacionXSeleccion() {
+        Integer index_selected = this.jtbTickets.getSelectedRow();
+        return index_selected != -1;
+    }
 
     private boolean validarAntesConsulta() {
         return true;

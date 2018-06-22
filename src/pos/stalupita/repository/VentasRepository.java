@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import pos.stalupita.model.DetalleTicket;
 import pos.stalupita.model.Ticket;
 
 /**
@@ -77,6 +78,17 @@ public class VentasRepository implements VentasDAOI {
                 + "select  t.idticket,t.total,t.ganancia,t.pago,t.cambio,DATE(t.fecha_registrado) as fecha_registrado,t.fecha_cancelado,t.pagado,t.estado  "
                 + " from ticket as t where t.fecha_registrado like '2018-" + mes + "%' AND t.estado=1 AND t.pagado=1) AS it GROUP BY it.fecha_registrado;";
         SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(Ticket.class);
+        return sqlQuery.list();
+    }
+
+    @Override
+    public List<DetalleTicket> getDetsAgrupadoXProducto(Date date) {
+        String query = " select dt.iddetticket as iddetticket,dt.idticket as idticket,dt.idproducto as idproducto, "
+                + " sum(dt.precio) as precio,sum(dt.cantidad) as cantidad,sum(dt.total) as total, sum(dt.ganancia) as ganancia "
+                + " from detalle_ticket as dt "
+                + " inner join ticket as t on dt.idticket =t.idticket "
+                + " where t.fecha_registrado like '" + formatoFechaSql.format(date) + "%' group by dt.idproducto;";
+        SQLQuery sqlQuery = this.getSession().createSQLQuery(query).addEntity(DetalleTicket.class);
         return sqlQuery.list();
     }
 }

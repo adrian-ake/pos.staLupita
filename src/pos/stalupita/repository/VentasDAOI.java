@@ -7,6 +7,7 @@ package pos.stalupita.repository;
 
 import java.util.Date;
 import java.util.List;
+import pos.stalupita.model.DetalleTicket;
 import pos.stalupita.model.Ticket;
 
 /**
@@ -18,4 +19,6 @@ public interface VentasDAOI {
     public List<Ticket> getTicketsByFech(Date f_desde, Date f_hasta);
 
     public List<Ticket> getMontosVentasXDia(int month);
+
+    public List<DetalleTicket> getDetsAgrupadoXProducto(Date date);
 }

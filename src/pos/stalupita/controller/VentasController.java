@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import pos.stalupita.model.DetalleTicket;
 import pos.stalupita.model.Ticket;
 import pos.stalupita.service.VentasService;
 
@@ -28,5 +29,9 @@ public class VentasController {
 
     public List<Ticket> getMontosVentasXDia(int month) {
         return this.ventasService.getMontosVentasXDia(month);
+    }
+
+    public List<DetalleTicket> getDetsAgrupadoXProducto(Date date) {
+        return this.ventasService.getDetsAgrupadoXProducto(date);
     }
 }

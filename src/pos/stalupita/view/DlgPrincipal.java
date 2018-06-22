@@ -54,6 +54,8 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private DlgVentas dlgVentas;
     @Resource
     private DlgGraficaVentas dlgGraficaVentas;
+    @Resource
+    private DlgGraficaVentaDia dlgGraficaVentaDia;
 
     @Resource
     private TicketController ticketController;
@@ -188,9 +190,10 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jMenu2 = new javax.swing.JMenu();
         jmitemCompras = new javax.swing.JMenuItem();
         jmitemventas = new javax.swing.JMenuItem();
+        jmitemGrafVentasDiarias = new javax.swing.JMenuItem();
+        jmitemGrafVentas = new javax.swing.JMenuItem();
         jmitemStock = new javax.swing.JMenuItem();
         jmitemGrafCompras = new javax.swing.JMenuItem();
-        jmitemGrafVentas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema- V1.0.0");
@@ -434,7 +437,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jMenu2.add(jmitemCompras);
 
         jmitemventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/basket_cart_red_shopping-24.png"))); // NOI18N
-        jmitemventas.setText("Ventas");
+        jmitemventas.setText("Reporte Ventas");
         jmitemventas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmitemventasActionPerformed(evt);
@@ -442,13 +445,14 @@ public class DlgPrincipal extends javax.swing.JDialog {
         });
         jMenu2.add(jmitemventas);
 
-        jmitemStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Search_document-24.png"))); // NOI18N
-        jmitemStock.setText("Stocks | Inventario");
-        jMenu2.add(jmitemStock);
-
-        jmitemGrafCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Chart-24.png"))); // NOI18N
-        jmitemGrafCompras.setText("Grafica Compras");
-        jMenu2.add(jmitemGrafCompras);
+        jmitemGrafVentasDiarias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/basket_cart_shopping-24.png"))); // NOI18N
+        jmitemGrafVentasDiarias.setText("Grafica Ventas Diarias");
+        jmitemGrafVentasDiarias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmitemGrafVentasDiariasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmitemGrafVentasDiarias);
 
         jmitemGrafVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Diagram-24.png"))); // NOI18N
         jmitemGrafVentas.setText("Grafica Ventas");
@@ -458,6 +462,14 @@ public class DlgPrincipal extends javax.swing.JDialog {
             }
         });
         jMenu2.add(jmitemGrafVentas);
+
+        jmitemStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Search_document-24.png"))); // NOI18N
+        jmitemStock.setText("Stocks | Inventario");
+        jMenu2.add(jmitemStock);
+
+        jmitemGrafCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/stalupita/view/resources/Chart-24.png"))); // NOI18N
+        jmitemGrafCompras.setText("Grafica Compras");
+        jMenu2.add(jmitemGrafCompras);
 
         jMenuBar1.add(jMenu2);
 
@@ -657,6 +669,12 @@ public class DlgPrincipal extends javax.swing.JDialog {
         this.dlgGraficaVentas.setVisible(true);
     }//GEN-LAST:event_jmitemGrafVentasActionPerformed
 
+    private void jmitemGrafVentasDiariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitemGrafVentasDiariasActionPerformed
+        this.dlgGraficaVentaDia.setModal(true);
+        this.dlgGraficaVentaDia.setLocationRelativeTo(null);
+        this.dlgGraficaVentaDia.setVisible(true);
+    }//GEN-LAST:event_jmitemGrafVentasDiariasActionPerformed
+
     private void cancelarTicket() {
         try {
             Ticket ticket_cancelar = this.getTicketCancel();
@@ -735,6 +753,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private javax.swing.JMenuItem jmitemCompras;
     private javax.swing.JMenuItem jmitemGrafCompras;
     private javax.swing.JMenuItem jmitemGrafVentas;
+    private javax.swing.JMenuItem jmitemGrafVentasDiarias;
     private javax.swing.JMenuItem jmitemInventario;
     private javax.swing.JMenuItem jmitemRegistrar;
     private javax.swing.JMenuItem jmitemStock;
@@ -803,18 +822,35 @@ public class DlgPrincipal extends javax.swing.JDialog {
     private Ticket getTicketActivo() {
         Ticket ticketActivo = this.ticketController.getTicketActivo();
         if (this.isNull(ticketActivo)) {//si es null se crea nuevo ticket
-            ticketActivo = new Ticket();
-            ticketActivo.setIdticket(0);
-            ticketActivo.setTotal(BigDecimal.ZERO);
-            ticketActivo.setGanancia(BigDecimal.ZERO);
-            ticketActivo.setPago(BigDecimal.ZERO);
-            ticketActivo.setCambio(BigDecimal.ZERO);
-            ticketActivo.setFechaRegistrado(new Date());
-            ticketActivo.setPagado(false);
-            ticketActivo.setEstado(true);
+            ticketActivo = this.getTicketNuevo();
             this.ticketController.guardarTicket(ticketActivo);
             ticketActivo = this.ticketController.getTicketActivo();
+        } else if (ticketActivo.getFechaRegistrado().before(new Date())) {//el ticket no es de hoy
+//            this.ticketController.actualizarTckt(this.prepararTckToCancel(ticketActivo));
+//            ticketActivo = this.getTicketNuevo();
+//            this.ticketController.guardarTicket(ticketActivo);
+//            ticketActivo = this.ticketController.getTicketActivo();
         }
+        return ticketActivo;
+    }
+
+    private Ticket prepararTckToCancel(Ticket ticket) {
+        ticket.setPagado(false);
+        ticket.setEstado(false);
+        ticket.setFechaCancelado(new Date());
+        return ticket;
+    }
+
+    public Ticket getTicketNuevo() {
+        Ticket ticketActivo = new Ticket();
+        ticketActivo.setIdticket(0);
+        ticketActivo.setTotal(BigDecimal.ZERO);
+        ticketActivo.setGanancia(BigDecimal.ZERO);
+        ticketActivo.setPago(BigDecimal.ZERO);
+        ticketActivo.setCambio(BigDecimal.ZERO);
+        ticketActivo.setFechaRegistrado(new Date());
+        ticketActivo.setPagado(false);
+        ticketActivo.setEstado(true);
         return ticketActivo;
     }
 

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import pos.stalupita.model.DetalleTicket;
 import pos.stalupita.model.Ticket;
 import pos.stalupita.repository.GenericDAOI;
 import pos.stalupita.repository.VentasDAOI;
@@ -29,5 +30,9 @@ public class VentasService {
 
     public List<Ticket> getMontosVentasXDia(int month) {
         return this.ticketDAOI.getMontosVentasXDia(month);
+    }
+
+    public List<DetalleTicket> getDetsAgrupadoXProducto(Date date) {
+        return this.ticketDAOI.getDetsAgrupadoXProducto(date);
     }
 }

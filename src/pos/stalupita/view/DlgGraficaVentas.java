@@ -8,13 +8,16 @@ package pos.stalupita.view;
 import java.awt.BorderLayout;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,17 +83,17 @@ public class DlgGraficaVentas extends javax.swing.JDialog {
         jpnlFondoVerde.setLayout(jpnlFondoVerdeLayout);
         jpnlFondoVerdeLayout.setHorizontalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlFondoVerdeLayout.createSequentialGroup()
-                .addContainerGap(351, Short.MAX_VALUE)
+            .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
+                .addGap(247, 247, 247)
                 .addComponent(jLabel1)
-                .addGap(240, 240, 240))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         jpnlFondoVerdeLayout.setVerticalGroup(
             jpnlFondoVerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlFondoVerdeLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlFondoVerdeLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -135,8 +138,8 @@ public class DlgGraficaVentas extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jmchooMes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,9 +173,21 @@ public class DlgGraficaVentas extends javax.swing.JDialog {
                 true,
                 false
         );
+        XYPlot plot = chart.getXYPlot();
+        XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
+        renderer.setLegendItemToolTipGenerator(
+                new StandardXYSeriesLabelGenerator("Legend {0}"));
+
+        ValueAxis range = plot.getRangeAxis();
+        range.setUpperMargin(0.20);
+
         ChartPanel CP = new ChartPanel(chart);
         pnlGraficaVta.removeAll();
         pnlGraficaVta.add(CP, BorderLayout.CENTER);
+        pnlGraficaVta.revalidate();
+        pnlGraficaVta.repaint();
+        this.revalidate();
+        this.repaint();
         this.pack();
     }
 
@@ -189,6 +204,7 @@ public class DlgGraficaVentas extends javax.swing.JDialog {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 if (day == i) {
                     total_vta_dia = ticket.getTotal();
+                    break;
                 }
             }
             series.add(i, total_vta_dia);
